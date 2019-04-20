@@ -74,4 +74,36 @@ export class AuthenticationService {
     }
     return true;
   }
+
+  register(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ): Observable<boolean> {
+    return this.http
+      .post(
+        `${environment.apiUrl}/Account/register`,
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          passwordConfirmation: password
+        },
+        { responseType: 'text' }
+      )
+      .pipe(
+        map((token: any) => {
+          if (token) {
+            localStorage.setItem(this._tokenKey, token.substr(1, token.length -2));
+            this._user$.next(email);
+            return true;
+          } else {
+            return false;
+          }
+        })
+      );
+  }
+
 }

@@ -1,8 +1,8 @@
-<div *ngIf="profile != null" class="row">
+<div *ngIf="loggedIn && profile != null" class="row">
   <div class="col-4 pane-container text-center">
     <img [src]="image" alt="" class="rounded-circle" style="width: 150px;">
-
     <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
+
   </div>
   <div class="col-8">
 
