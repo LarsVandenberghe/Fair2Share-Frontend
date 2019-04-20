@@ -1,0 +1,8 @@
+.nav-link{
+    color: white;
+    cursor: context-menu;
+}
+
+.nav-link:hover{
+    color: lightgray;
+}

@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container login-container">
   <div class="row">
-    <div class="container" id="formContainer">
-      <form [formGroup]="user" (ngSubmit)="onSubmit()" class="form-signin">
-        <h1 class="form-signin-heading">Login</h1>
+    <div class="container">
+      <form [formGroup]="user" (ngSubmit)="onSubmit()">
+        <h1>Login</h1>
         <div>
           <input placeholder="email" aria-label="email" formControlName="username" class="form-control">
           <input type="password" placeholder="password" aria-label="password" formControlName="password"
             class="form-control">
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
           <div *ngIf="errorMsg != null && errorMsg != ''" class="alert-danger" style="margin: 10px 0px; padding: 7px">{{errorMsg}}</div>
         </div>
       </form>

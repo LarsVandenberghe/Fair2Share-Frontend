@@ -1,0 +1,16 @@
+<div *ngIf="profile != null" class="row">
+  <div class="col-4 pane-container text-center">
+    <img [src]="image" alt="" class="rounded-circle" style="width: 150px;">
+
+    <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
+  </div>
+  <div class="col-8">
+
+  </div>
+</div>
+<div *ngIf="!loggedIn" class="container">
+  <div class="alert alert-danger">
+      You are not logged in! Click <a class="btn-link" href="./home">here</a> to login.
+  </div>
+</div>
+

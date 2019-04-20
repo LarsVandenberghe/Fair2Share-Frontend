@@ -48,10 +48,10 @@ export class AuthenticationService {
         { email, password},
         { responseType: 'text' }
       ).pipe(
-      map((token: any) => {
+      map((token: string) => {
         console.log(token)
         if (token) {
-          localStorage.setItem(this._tokenKey, token);
+          localStorage.setItem(this._tokenKey, token.substr(1, token.length -2)); //token is sent including double quotes
           this._user$.next(email);
           return true;
         } else {
@@ -67,5 +67,11 @@ export class AuthenticationService {
       this._user$.next(null);
     }
   }
-  
+
+  loggedIn() : boolean {
+    if (this.token == null || this.token == ''){
+      return false;
+    }
+    return true;
+  }
 }
