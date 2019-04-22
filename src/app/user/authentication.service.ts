@@ -44,14 +44,14 @@ export class AuthenticationService {
 
   login(email: string, password: string): Observable<boolean> {
     return this.http.post(
-        `${environment.apiUrl}/Account`,
-        { email, password},
-        { responseType: 'text' }
-      ).pipe(
+      `${environment.apiUrl}/Account`,
+      { email, password },
+      { responseType: 'text' }
+    ).pipe(
       map((token: string) => {
         console.log(token)
         if (token) {
-          localStorage.setItem(this._tokenKey, token.substr(1, token.length -2)); //token is sent including double quotes
+          localStorage.setItem(this._tokenKey, token.substr(1, token.length - 2)); //token is sent including double quotes
           this._user$.next(email);
           return true;
         } else {
@@ -68,8 +68,8 @@ export class AuthenticationService {
     }
   }
 
-  loggedIn() : boolean {
-    if (this.token == null || this.token == ''){
+  loggedIn(): boolean {
+    if (this.token == null || this.token == '') {
       return false;
     }
     return true;
@@ -79,7 +79,8 @@ export class AuthenticationService {
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    passwordConfirmation: string
   ): Observable<boolean> {
     return this.http
       .post(
@@ -89,14 +90,14 @@ export class AuthenticationService {
           lastName,
           email,
           password,
-          passwordConfirmation: password
+          passwordConfirmation
         },
         { responseType: 'text' }
       )
       .pipe(
         map((token: any) => {
           if (token) {
-            localStorage.setItem(this._tokenKey, token.substr(1, token.length -2));
+            localStorage.setItem(this._tokenKey, token.substr(1, token.length - 2));
             this._user$.next(email);
             return true;
           } else {
@@ -105,5 +106,14 @@ export class AuthenticationService {
         })
       );
   }
+
+  checkUserNameAvailability = (email: string): Observable<boolean> => {
+    return this.http.get<boolean>(
+      `${environment.apiUrl}/account/checkusername`,
+      {
+        params: { email }
+      }
+    );
+  };
 
 }

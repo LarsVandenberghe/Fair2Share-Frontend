@@ -2,7 +2,7 @@
   <form [formGroup]="user" (ngSubmit)="onSubmit()">
     <h1>Register</h1>
     <div class="form-group">
-      <label>First Name</label>
+      <label>First Name*</label>
       <input
         matInput
         placeholder="first name"
@@ -10,9 +10,12 @@
         formControlName="firstName"
         class="form-control"
       />
+      <div class="alert alert-danger" *ngIf="user.get('firstName').errors && user.get('firstName').touched">
+        {{getErrorMessage(user.get('firstName').errors)}}
+      </div>
     </div>
     <div class="form-group">
-      <label>Last Name</label>
+      <label>Last Name*</label>
       <input
         matInput
         placeholder="last name"
@@ -20,9 +23,12 @@
         formControlName="lastName"
         class="form-control"
       />
+      <div class="alert alert-danger" *ngIf="user.get('lastName').errors && user.get('lastName').touched">
+        {{getErrorMessage(user.get('lastName').errors)}}
+      </div>
     </div>
     <div class="form-group">
-      <label>Email</label>
+      <label>Email*</label>
       <input
         matInput
         placeholder="email"
@@ -33,11 +39,14 @@
       <small id="emailHelp" class="form-text text-muted"
         >We'll never share your email with anyone else.
       </small>
+      <div class="alert alert-danger" *ngIf="user.get('email').errors && user.get('email').touched">
+        {{ getErrorMessage(user.get('email').errors) }}
+      </div>
     </div>
 
     <span formGroupName="passwordGroup">
       <div class="form-group">
-            <label>Password</label>
+        <label>Password*</label>
         <input
           type="password"
           matInput
@@ -46,10 +55,13 @@
           formControlName="password"
           class="form-control"
         />
+        <div class="alert alert-danger" *ngIf="user.get('passwordGroup').get('password').errors && user.get('passwordGroup').get('password').touched">
+          {{getErrorMessage(user.get('passwordGroup').get('password').errors)}}
+        </div>
       </div>
 
       <div class="form-group">
-            <label>Confirm Password</label>
+        <label>Confirm Password*</label>
         <input
           type="password"
           matInput
@@ -58,8 +70,15 @@
           formControlName="confirmPassword"
           class="form-control"
         />
+        <div  class="alert alert-danger" *ngIf="user.get('passwordGroup').errors && user.get('passwordGroup').get('confirmPassword').touched && user.get('passwordGroup').get('password').touched">
+          {{ getErrorMessage(user.get('passwordGroup').errors) }}
+        </div>
       </div>
     </span>
+    <div class="alert alert-danger" *ngIf="errorMsg != null && errorMsg != ''">
+      Error while trying to register:
+      <p *ngFor="let message of formatHttpRequestError(errorMsg)">{{message}}</p>
+    </div>
 
     <button type="submit" class="btn btn-primary">
       Register
