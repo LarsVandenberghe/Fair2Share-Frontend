@@ -1,15 +1,31 @@
-<div *ngIf="loggedIn && profile != null" class="row">
-  <div class="col-4 pane-container text-center">
-    <img [src]="image" alt="" class="rounded-circle" style="width: 150px; height: 150px;">
-    <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
-  </div>
-  <div class="col-8">
+<div class="container-fluid">
 
+
+  <div *ngIf="loggedIn && profile != null" class="row">
+    <div class="col-md-4 blank-padding10px">
+      <div class="pane-container text-center">
+        <img [src]="image" alt="" class="rounded-circle" style="width: 150px; height: 150px;">
+        <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
+      </div>
+    </div>
+    <div class="col-md-8 blank-padding10px">
+      <div class="pane-container">
+        <ul class="list-group">
+          <li class="list-group-item active">
+            <h4 class="float-left">Activities</h4>
+            <!-- <a class="float-right border add-button">+</a> -->
+            <button class="float-right border add-button">+</button>
+          </li>
+          <li class="list-group-item activity" *ngFor="let act of profile.activities">
+            <a>{{act.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
-<div *ngIf="!loggedIn" class="container">
-  <div class="alert alert-danger">
+  <div *ngIf="!loggedIn" class="container">
+    <div class="alert alert-danger">
       You are not logged in! Click <a class="btn-link" href="./home">here</a> to login.
+    </div>
   </div>
 </div>
-

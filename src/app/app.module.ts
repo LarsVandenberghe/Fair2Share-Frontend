@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './user/register.component';
+import { ActivityListComponent } from './profile/activity-list/activity-list.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    ActivityListComponent
   ],
   imports: [
     BrowserModule,

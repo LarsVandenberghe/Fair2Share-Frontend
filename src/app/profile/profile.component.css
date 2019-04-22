@@ -1,9 +1,33 @@
 .pane-container{
-    margin: 10px;
-    width: 250px;
+    width: 100%;
     background-color: white;
     padding: 10px;
+    box-sizing: border-box;
     -webkit-box-shadow: 0px 0px 19px -3px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 19px -3px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 19px -3px rgba(0,0,0,0.75);
   }
+
+
+.blank-padding10px{
+  padding: 10px;
+}
+
+.add-button{
+  width: 30px; 
+  height: 30px; 
+  text-align: center; 
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 0.3em;
+  background-color: rgba(0,0,0,0);
+  color: white;
+}
+
+.add-button:hover{
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.activity:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}

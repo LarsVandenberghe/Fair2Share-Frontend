@@ -1,4 +1,5 @@
 import { IFriend } from './IFriend';
+import { IActivity } from './IActivity';
 
 export interface IProfile{
     profileId: number;
@@ -7,5 +8,7 @@ export interface IProfile{
     email: string;
     pathToImage: string;
     friends: IFriend[];
+    activities: IActivity[];
     amountOfFriendRequests: number;
+
 }
