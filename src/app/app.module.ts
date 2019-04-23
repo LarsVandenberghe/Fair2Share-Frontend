@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserModule } from './user/user.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -16,8 +17,9 @@ import { AddActivityComponent } from './activity/add-activity/add-activity.compo
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'register', component: RegisterComponent},
-  { path: 'add-activity', component: AddActivityComponent},
+  { path: 'register', component: RegisterComponent },
+  { path: 'add-activity', component: AddActivityComponent },
+  { path: 'activity', component: ActivityComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
   // { path: '**', component: PageNotFoundComponent}
 ];
@@ -34,7 +36,9 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     UserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IActivity } from 'src/app/data_types/IActivity';
 
 @Component({
@@ -8,13 +8,16 @@ import { IActivity } from 'src/app/data_types/IActivity';
 })
 export class ActivityListComponent implements OnInit {
   @Input() public activity: IActivity;
+  @Output() notify : EventEmitter<IActivity> = new EventEmitter<IActivity>();
+
   constructor() { }
 
   ngOnInit() {
   }
   
   editActivity(): void{
-    console.log(`${this.activity.name} clicked!`)
+    //console.log(`${this.activity.name} clicked!`);
+    this.notify.emit(this.activity);
   }
 
 }

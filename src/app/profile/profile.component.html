@@ -17,7 +17,7 @@
             <button class="float-right border add-button" (click)="addActivity()">+</button>
           </li>
           <li class="list-group-item activity" *ngFor="let act of profile.activities">
-              <app-activity-list [activity]="act"></app-activity-list>
+              <app-activity-list [activity]="act" (notify)="onActivityNotify($event)"></app-activity-list>
           </li>
         </ul>
       </div>
