@@ -1,6 +1,6 @@
 .nav-link{
     color: white;
-    cursor: context-menu;
+    cursor: pointer;
 }
 
 .nav-link:hover{

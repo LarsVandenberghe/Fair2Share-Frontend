@@ -14,10 +14,10 @@
           <li class="list-group-item active">
             <h4 class="float-left">Activities</h4>
             <!-- <a class="float-right border add-button">+</a> -->
-            <button class="float-right border add-button">+</button>
+            <button class="float-right border add-button" (click)="addActivity()">+</button>
           </li>
           <li class="list-group-item activity" *ngFor="let act of profile.activities">
-            <a>{{act.name}}</a>
+              <app-activity-list [activity]="act"></app-activity-list>
           </li>
         </ul>
       </div>

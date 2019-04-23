@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileDataService } from './profile-data.service';
 import { IProfile } from '../data_types/IProfile';
 import { AuthenticationService } from '../user/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ export class ProfileComponent implements OnInit {
   private _profile : IProfile;
   public errorMessage: string;
 
-  constructor(private dataService: ProfileDataService, private authService : AuthenticationService) { }
+  constructor(private dataService: ProfileDataService, private authService : AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.dataService.getProfile$().subscribe(
@@ -39,5 +40,9 @@ export class ProfileComponent implements OnInit {
 
   get loggedIn() : boolean {
     return this.authService.loggedIn();
+  }
+
+  addActivity() : void{
+    this.router.navigateByUrl("add-activity");
   }
 }

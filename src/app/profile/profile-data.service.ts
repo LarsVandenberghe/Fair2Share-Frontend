@@ -23,7 +23,12 @@ export class ProfileDataService {
     );
   }
 
-  // getActivities$(): Observable<IActivity>{
-  //   return this.http.get<IActivity>(``)
-  // }
+  getActivities$(): Observable<IActivity[]>{
+    return this.http.get<IActivity[]>(`${environment.apiUrl}/Activity/`).pipe(
+      catchError(error => {
+        this.loadingError$.next(error.statusText);
+        return of(null);
+      })
+    );
+  }
 }
