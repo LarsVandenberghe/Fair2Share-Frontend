@@ -4,8 +4,28 @@
   <div *ngIf="loggedIn && profile != null" class="row">
     <div class="col-md-4 blank-padding10px">
       <div class="pane-container text-center">
+
         <img [src]="image" alt="" class="rounded-circle" style="width: 150px; height: 150px;">
         <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
+
+        <div class="friends-nav">
+          <a class="friends-nav-title">Friends</a>
+          <span class="float-right">
+            <i class="fa fa-user-plus friends-nav-button" aria-hidden="true" style="margin: 10px; margin-bottom: 0px; font-size: 2.4em"></i>
+            <span class="box" *ngIf="profile.amountOfFriendRequests != null && profile.amountOfFriendRequests > 0">
+              <i class="fa fa-users fa-2x friends-nav-button" aria-hidden="true" style="margin: 10px; margin-bottom: 0px;"></i>
+              <div class="text">
+                {{profile.amountOfFriendRequests > 99 ? '99+' : profile.amountOfFriendRequests}}
+              </div>
+            </span>
+          </span>
+        </div>
+        <ul class="list-group list-group-flush" style="text-align: left">
+          <li class="list-group-item" *ngFor="let friend of profile.friends">
+            <app-friend-list-item [friend]="friend"></app-friend-list-item>
+          </li>
+        </ul>
+
       </div>
     </div>
     <div class="col-md-8 blank-padding10px">
@@ -17,7 +37,7 @@
             <button class="float-right border add-button" (click)="addActivity()">+</button>
           </li>
           <li class="list-group-item activity" *ngFor="let act of profile.activities">
-              <app-activity-list [activity]="act" (notify)="onActivityNotify($event)"></app-activity-list>
+            <app-activity-list [activity]="act" (notify)="onActivityNotify($event)"></app-activity-list>
           </li>
         </ul>
       </div>

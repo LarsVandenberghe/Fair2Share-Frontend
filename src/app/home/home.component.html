@@ -1,4 +1,4 @@
-<div *ngIf="!loggedIn()">
+<!-- <div *ngIf="!loggedIn()"> -->
     <div class="row">
         <div class="col-md-8">
             <div class="container">
@@ -6,12 +6,12 @@
                 <p>Have you ever been with friend on holiday and had issues keeping track of payments? If so this website might be something for you.</p>
             </div>
         </div>
-        <div class="col-md-4"><app-login></app-login></div>
+        <div class="col-md-4" *ngIf="!loggedIn()"><app-login></app-login></div>
     </div>
-</div>
+<!-- </div> -->
 
-<div *ngIf="loggedIn()">
+<!-- <div *ngIf="loggedIn()">
     <p>You are loggedin as: </p>
-</div>
+</div> -->
 
 

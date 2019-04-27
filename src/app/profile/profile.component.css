@@ -31,3 +31,49 @@
   background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
+
+/* friend request css*/
+.box{
+  position: relative;
+  display: inline-block; /* Make the width of box same as image*/
+  margin: 2px;
+}
+.box .text{
+  position: absolute;
+  z-index: 999;
+  padding: 0px 3px;
+  right: 0;        
+  text-align: center;
+  top: 0%; /* Adjust this value to move the positioned div up and down */
+  background: rgba(255, 0, 0, 0.9);
+  font-family: Arial,sans-serif;
+  color: #fff;
+  font-size: small;
+  min-width: 20px;
+  border-radius: 2px;
+  /*width: 60%; /* Set the width of the positioned div */
+}
+
+/*Friends box*/
+
+.friends-nav{
+  color: white; 
+  background-color: #007bff; 
+  text-align: left;
+}
+
+.friends-nav-title{
+  font-size: 1.4em;
+  padding: 10px;
+  display: inline-block;
+}
+
+.friends-nav-button{
+  cursor: pointer;
+}
+.friends-nav-button:hover{
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+

@@ -13,6 +13,7 @@ import { RegisterComponent } from './user/register.component';
 import { ActivityComponent } from './activity/activity/activity.component';
 import { ActivityListComponent } from './profile/activity-list/activity-list.component';
 import { AddActivityComponent } from './activity/add-activity/add-activity.component';
+import { FriendListItemComponent } from './friend-list-item/friend-list-item.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ActivityComponent,
     ActivityListComponent,
-    AddActivityComponent
+    AddActivityComponent,
+    FriendListItemComponent
   ],
   imports: [
     BrowserModule,
