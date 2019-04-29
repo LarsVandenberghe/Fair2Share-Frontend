@@ -11,20 +11,27 @@ import { ActivityDataService } from '../activity-data.service';
   styleUrls: ['./activity.component.css']
 })
 export class ActivityComponent implements OnInit {
-  private _activity$: IActivity;
-  constructor(private activatedRoute: ActivatedRoute, private dataService: ActivityDataService, private router : Router) { }
+  private _activity$: Observable<IActivity>;
+  public errorMessage : string;
+  constructor(private dataService: ActivityDataService, private router : Router) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.pipe(
-      map(() => window.history.state),
-      flatMap((a: IActivity) => this.dataService.getActivity$(a.activityId))
-    ).subscribe(act => {
-      this._activity$ = act;
-      console.log("TODO: page not found!");
-    });
+    if (this.dataService.simpleLocalActivity == null){
+      this.errorMessage = "Invalid action, please select an activity on your profile!"
+    }else {
+      this._activity$ = this.dataService.getActivity$(this.dataService.simpleLocalActivity.activityId);
+    }
+    
+    // this.activatedRoute.paramMap.pipe(
+    //   (a: IActivity) => this.dataService.getActivity$(a.activityId))
+    // ).subscribe(act => {
+    //   this._activity$ = act;
+    //   console.log("TODO: page not found!");
+    // });
+    // this._activity$ = {name: "test", activityId: 0, description: "", currencyType: 1, participants: []};
   }
 
-  public get activity$(): IActivity{
+  public get activity$(): Observable<IActivity>{
     return this._activity$;
   }
 }

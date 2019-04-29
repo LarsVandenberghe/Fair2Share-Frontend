@@ -4,6 +4,7 @@ import { IProfile } from '../../data_types/IProfile';
 import { AuthenticationService } from '../../user/authentication.service';
 import { Router } from '@angular/router';
 import { IActivity } from '../../data_types/IActivity';
+import { ActivityDataService } from 'src/app/activity/activity-data.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,11 @@ export class ProfileComponent implements OnInit {
   private _profile : IProfile;
   public errorMessage: string;
 
-  constructor(private dataService: ProfileDataService, private authService : AuthenticationService, private router: Router) { }
+  constructor(
+    private dataService: ProfileDataService, 
+    private authService : AuthenticationService, 
+    private router: Router,
+    private activityService: ActivityDataService) { }
 
   ngOnInit() {
     this.dataService.getProfile$().subscribe(
@@ -47,8 +52,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigateByUrl(this.router.url + "/add-activity");
   }
 
-  onActivityNotify(activity : IActivity){
-    this.router.navigateByUrl("./activity", { state: activity});
-    //this.router.navigate(['/activity', activity]);
+  onEditActivity(activity : IActivity){
+    this.activityService.simpleLocalActivity = activity;
+    this.router.navigate(['profile', 'activity']);
   }
 }

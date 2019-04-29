@@ -10,6 +10,7 @@ import { IActivity } from '../data_types/IActivity';
 })
 export class ActivityDataService {
   public loadingError$ = new Subject<string>();
+  public simpleLocalActivity : IActivity;
   constructor(private http: HttpClient) { }
 
   addActivity$(

@@ -15,7 +15,7 @@ export class ActivityListComponent implements OnInit {
   ngOnInit() {
   }
   
-  editActivity(): void{
+  deleteActivity(): void{
     //console.log(`${this.activity.name} clicked!`);
     this.notify.emit(this.activity);
   }

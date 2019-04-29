@@ -1,8 +1,13 @@
-<div *ngIf="activity$ != null">{{activity$.name}}</div> 
+<div *ngIf="(activity$ | async) as activity">{{activity.name}}</div>
 
-
-<!-- <div *ngIf="activity$ == null" class="container">
+<div *ngIf="errorMessage" class="container">
+    <div class="alert alert-danger">{{errorMessage}}</div>
+    
+</div>
+<!-- <ng-template #noValidAct class="container">
     <div class="alert alert-danger">
         Invalid action!
     </div>
-</div> -->
+</ng-template> 
+; else noValidAct
+-->

@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   { 
       path: 'profile', 
       canActivate: [AuthGuard],
-      loadChildren: './profile/profile.module#ProfileModule',
+      loadChildren: '../profile/profile.module#ProfileModule',
       data: { preload: true }
   },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
