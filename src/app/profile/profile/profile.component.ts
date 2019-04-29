@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileDataService } from './profile-data.service';
-import { IProfile } from '../data_types/IProfile';
-import { AuthenticationService } from '../user/authentication.service';
+import { ProfileDataService } from '../profile-data.service';
+import { IProfile } from '../../data_types/IProfile';
+import { AuthenticationService } from '../../user/authentication.service';
 import { Router } from '@angular/router';
-import { IActivity } from '../data_types/IActivity';
+import { IActivity } from '../../data_types/IActivity';
 
 @Component({
   selector: 'app-profile',
@@ -44,11 +44,11 @@ export class ProfileComponent implements OnInit {
   }
 
   addActivity() : void{
-    this.router.navigateByUrl("add-activity");
+    this.router.navigateByUrl(this.router.url + "/add-activity");
   }
 
   onActivityNotify(activity : IActivity){
-    this.router.navigateByUrl("/activity", { state: activity});
+    this.router.navigateByUrl("./activity", { state: activity});
     //this.router.navigate(['/activity', activity]);
   }
 }

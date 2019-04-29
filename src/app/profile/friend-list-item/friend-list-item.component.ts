@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IFriend } from '../data_types/IFriend';
+import { IFriend } from '../../data_types/IFriend';
 
 @Component({
   selector: 'app-friend-list-item',
