@@ -16,10 +16,10 @@ export class ActivityComponent implements OnInit {
   constructor(private dataService: ActivityDataService, private router : Router) { }
 
   ngOnInit() {
-    if (this.dataService.simpleLocalActivity == null){
+    if (this.dataService.localActivityId == null){
       this.errorMessage = "Invalid action, please select an activity on your profile!"
     }else {
-      this._activity$ = this.dataService.getActivity$(this.dataService.simpleLocalActivity.activityId);
+      this._activity$ = this.dataService.getActivity$(this.dataService.localActivityId);
     }
     
     // this.activatedRoute.paramMap.pipe(

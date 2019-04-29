@@ -53,7 +53,17 @@ export class ProfileComponent implements OnInit {
   }
 
   onEditActivity(activity : IActivity){
-    this.activityService.simpleLocalActivity = activity;
+    this.activityService.localActivityId = activity.activityId;
     this.router.navigate(['profile', 'activity']);
+  }
+
+  onDeleteActivity(activity : IActivity){
+    this.activityService.deleteActivity$(activity.activityId).subscribe();
+
+    //reload profile
+    this.dataService.getProfile$().subscribe(
+      profile => this._profile = profile,
+      err => this.errorMessage = err
+    );
   }
 }

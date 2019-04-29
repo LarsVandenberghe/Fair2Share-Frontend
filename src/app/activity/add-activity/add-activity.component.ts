@@ -33,11 +33,17 @@ export class AddActivityComponent implements OnInit {
     if (this.valutas.indexOf(this.activity.value.valuta) < 0){
       throw new Error(`invalid selection! ${this.activity.value.valuta}`);
     }
+    //let id : number;
     this.dataService.addActivity$(
       this.activity.value.name,
       this.activity.value.description,
       this.valutas.indexOf(this.activity.value.valuta)
-    ).subscribe()
+    ).subscribe(
+      val => {
+        this.dataService.localActivityId = val;
+        this.router.navigate(['profile', 'activity']);
+      }
+    )
   }
 
   handleCancle(){

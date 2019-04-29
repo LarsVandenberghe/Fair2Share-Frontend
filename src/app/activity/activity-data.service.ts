@@ -10,15 +10,15 @@ import { IActivity } from '../data_types/IActivity';
 })
 export class ActivityDataService {
   public loadingError$ = new Subject<string>();
-  public simpleLocalActivity : IActivity;
+  public localActivityId : number;
   constructor(private http: HttpClient) { }
 
   addActivity$(
     name: string,
     description:string,
     currencyType: number
-  ){ 
-    return this.http.post(
+  ) : Observable<number>{ 
+    return this.http.post<number>(
         `${environment.apiUrl}/Activity`,
         {
           name,
@@ -35,6 +35,9 @@ export class ActivityDataService {
           return of(null);
         })
       );
-    
+  }
+
+  deleteActivity$(id: number){
+    return this.http.delete(`${environment.apiUrl}/Activity/${id}`);
   }
 }

@@ -1,5 +1,5 @@
 <div>
   {{activity.name}}
-  <div class="float-right">delete</div>
+  <button class="float-right btn btn-primary" (click)="deleteActivity();$event.stopPropagation()">delete</button>
   <!-- (click)="deleteActivity() -->
 </div>
