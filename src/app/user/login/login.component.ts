@@ -32,8 +32,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         val => {
           if (val) {
-            console.log("user is logged in.");
-            this.router.navigateByUrl('/profile');
+            if (this.authService.redirectUrl) {
+              this.router.navigateByUrl(this.authService.redirectUrl);
+              this.authService.redirectUrl = undefined;
+            } else {
+              this.router.navigateByUrl('/profile');
+            }
           } else {
             console.log("Could not login.");
             this.errorMsg = `Could not login`;

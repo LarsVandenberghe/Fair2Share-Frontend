@@ -20,6 +20,7 @@ export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<string>;
   //public localStorage: Storage = new Storage();
+  public redirectUrl: string;
 
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
