@@ -12,7 +12,7 @@
           <a class="friends-nav-title">Friends</a>
           <span class="float-right">
             <i class="fa fa-user-plus friends-nav-button" aria-hidden="true" style="margin: 10px; margin-bottom: 0px; font-size: 2.4em"></i>
-            <span class="box" *ngIf="profile.amountOfFriendRequests != null && profile.amountOfFriendRequests > 0">
+            <span class="box" *ngIf="profile.amountOfFriendRequests != null && profile.amountOfFriendRequests > 0" (click)="viewFriendRequests()">
               <i class="fa fa-users fa-2x friends-nav-button" aria-hidden="true" style="margin: 10px; margin-bottom: 0px;"></i>
               <div class="text">
                 {{profile.amountOfFriendRequests > 99 ? '99+' : profile.amountOfFriendRequests}}

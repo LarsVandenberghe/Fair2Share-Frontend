@@ -66,4 +66,8 @@ export class ProfileComponent implements OnInit {
       err => this.errorMessage = err
     );
   }
+
+  viewFriendRequests(){
+    this.router.navigate(['profile', 'friend-requests']);
+  }
 }

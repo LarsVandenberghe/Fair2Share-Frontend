@@ -1,0 +1,26 @@
+<div class="container">
+  <ul class="list-group" *ngIf="getFutureFriends() != null && getFutureFriends().length > 0">
+    <li class="list-group-item active">
+      <h4>Friend requests</h4>
+    </li>
+    <li *ngFor="let futureFriend of getFutureFriends()" class="list-group-item">
+      <app-friend-list-item [friend]="futureFriend"></app-friend-list-item>
+      <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-success" (click)="handleFriendRequest(futureFriend, true)">accept</button>
+        <button type="button" class="btn btn-danger" (click)="handleFriendRequest(futureFriend, false)">ignore</button>
+      </div>
+    </li>
+  </ul>
+  <hr>
+  <ul class="list-group" *ngIf="getDeniedFutureFriends() != null && getDeniedFutureFriends().length > 0">
+      <li class="list-group-item active">
+        <h4>Denied friend requests</h4>
+      </li>
+      <li *ngFor="let futureFriend of getDeniedFutureFriends()" class="list-group-item">
+        <app-friend-list-item [friend]="futureFriend"></app-friend-list-item>
+        <div class="btn-group float-right" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-success" (click)="handleFriendRequest(futureFriend, true)">accept</button>
+        </div>
+      </li>
+    </ul>
+</div>

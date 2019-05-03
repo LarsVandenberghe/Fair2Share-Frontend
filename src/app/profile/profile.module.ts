@@ -6,8 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FriendListItemComponent } from './friend-list-item/friend-list-item.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { AddActivityComponent } from '../activity/add-activity/add-activity.component';
-//import { ActivityModule } from '../activity/activity.module';
-//import { ActivityComponent } from '../activity/activity/activity.component';
+import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
 
 const routes = [
   { path: '', component: ProfileComponent },
@@ -16,7 +15,8 @@ const routes = [
     path: 'activity', 
     loadChildren: '../activity/activity.module#ActivityModule'
     //data: { preload: true }
-},
+  },
+  { path: 'friend-requests', component: FriendRequestsComponent }
 ];
 
 @NgModule({
@@ -24,15 +24,13 @@ const routes = [
     ActivityListComponent,
     ProfileComponent,
     FriendListItemComponent,
-    AddActivityComponent
+    AddActivityComponent,
+    FriendRequestsComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
-  // ,exports: [
-  //   RouterModule
-  // ]
 })
 export class ProfileModule { }
