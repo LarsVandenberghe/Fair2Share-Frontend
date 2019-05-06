@@ -22,6 +22,10 @@ export class FriendRequestDataService {
   }
 
   handleFriendRequest$(futurFriendId: number, accept:boolean): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/FriendRequest/${futurFriendId}/${accept}`, {})
+    return this.http.post(`${environment.apiUrl}/FriendRequest/${futurFriendId}/${accept}`, {});
+  }
+
+  sendFriendRequest$(friendEmail : string): Observable<any>{
+    return this.http.post(`${environment.apiUrl}/FriendRequest/email/${friendEmail}`, {});
   }
 }

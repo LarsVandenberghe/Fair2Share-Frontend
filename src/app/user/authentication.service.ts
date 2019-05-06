@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
 
 function parseJwt(token) {
   if (!token) {
