@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="padding-top: 10px;">
   <ul class="list-group" *ngIf="getFutureFriends() != null && getFutureFriends().length > 0">
     <li class="list-group-item active">
       <h4>Friend requests</h4>
@@ -11,9 +11,9 @@
       </div>
     </li>
   </ul>
-  <hr>
+  <hr *ngIf="(getDeniedFutureFriends() != null && getDeniedFutureFriends().length > 0) && (getFutureFriends() != null && getFutureFriends().length > 0)">
   <ul class="list-group" *ngIf="getDeniedFutureFriends() != null && getDeniedFutureFriends().length > 0">
-      <li class="list-group-item active">
+      <li class="list-group-item darkenblue">
         <h4>Denied friend requests</h4>
       </li>
       <li *ngFor="let futureFriend of getDeniedFutureFriends()" class="list-group-item">
@@ -23,4 +23,10 @@
         </div>
       </li>
     </ul>
+    <div class="alert alert-danger" *ngIf="(getDeniedFutureFriends() != null && getDeniedFutureFriends().length === 0) && (getFutureFriends() != null && getFutureFriends().length === 0)">
+      You have no friend requests! <a>Add new friends here.</a>
+    </div>
+
+    <button class="btn btn-success" style="margin-top: 10px; margin-bottom: 10px;" [routerLink]="'/profile'">Cancel</button>
+
 </div>

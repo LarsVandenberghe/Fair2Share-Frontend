@@ -7,16 +7,18 @@ import { FriendListItemComponent } from './friend-list-item/friend-list-item.com
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { AddActivityComponent } from '../activity/add-activity/add-activity.component';
 import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
+import { AddFriendComponent } from './add-friend/add-friend.component';
 
 const routes = [
   { path: '', component: ProfileComponent },
   { path: 'add-activity', component: AddActivityComponent},
   { 
     path: 'activity', 
-    loadChildren: '../activity/activity.module#ActivityModule'
-    //data: { preload: true }
+    loadChildren: '../activity/activity.module#ActivityModule',
+    data: { preload: true }
   },
-  { path: 'friend-requests', component: FriendRequestsComponent }
+  { path: 'friend-requests', component: FriendRequestsComponent },
+  { path: 'send-friend-request', component: AddFriendComponent },
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes = [
     ProfileComponent,
     FriendListItemComponent,
     AddActivityComponent,
-    FriendRequestsComponent
+    FriendRequestsComponent,
+    AddFriendComponent
   ],
   imports: [
     CommonModule,

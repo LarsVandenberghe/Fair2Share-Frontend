@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class FriendRequestsComponent implements OnInit {
   private _futureFriends : IFriend[];
   private _deniedFutureFriends : IFriend[];
+  public isCollapsed: boolean = true;
   constructor(private friendRequestData : FriendRequestDataService, private router: Router) { }
 
   ngOnInit() {
@@ -29,7 +30,8 @@ export class FriendRequestsComponent implements OnInit {
   }
 
   handleFriendRequest(friend : IFriend, accept : boolean) : void {
-    this.friendRequestData.handleFriendRequest$(friend.profileId, accept).subscribe(() => {
+    this.friendRequestData.handleFriendRequest$(friend.profileId, accept).subscribe((data) => {
+      this.ngOnInit();
     });
   } 
 
