@@ -8,6 +8,7 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { AddActivityComponent } from '../activity/add-activity/add-activity.component';
 import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes = [
   { path: '', component: ProfileComponent },
@@ -19,6 +20,7 @@ const routes = [
   },
   { path: 'friend-requests', component: FriendRequestsComponent },
   { path: 'send-friend-request', component: AddFriendComponent },
+  { path: 'edit-profile', component: EditProfileComponent }
 ];
 
 @NgModule({
@@ -28,7 +30,8 @@ const routes = [
     FriendListItemComponent,
     AddActivityComponent,
     FriendRequestsComponent,
-    AddFriendComponent
+    AddFriendComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,

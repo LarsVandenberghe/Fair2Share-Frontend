@@ -75,5 +75,23 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.profile{
+  position: relative;
+}
+.profile:hover .gear{
+  visibility: visible;
+}
+
+.gear{
+  position: absolute;
+  z-index: 999;
+  padding: 0px 3px;
+  right: 0;
+  visibility: hidden;
+  color: gray;
+}
+.gear:hover{
+  color: black;
+}
 
 

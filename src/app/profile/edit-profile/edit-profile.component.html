@@ -1,0 +1,37 @@
+<div class="container" *ngIf="simpleProfile != null">
+  <form [formGroup]="profile" (ngSubmit)="onSubmit()">
+    <h1>Account settings</h1>
+    <div class="card container">
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label>First Name*</label>
+            <input  aria-label="first name" formControlName="firstName"
+              class="form-control" />
+            <!-- <div class="alert alert-danger" *ngIf="user.get('firstName').errors && user.get('firstName').touched">
+                  {{getErrorMessage(user.get('firstName').errors)}}
+                </div> -->
+          </div>
+          <div class="form-group col-md-4">
+            <label>Last Name*</label>
+            <input  aria-label="last name" formControlName="lastName"
+              class="form-control" />
+            <!-- <div class="alert alert-danger" *ngIf="user.get('firstName').errors && user.get('firstName').touched">
+                    {{getErrorMessage(user.get('firstName').errors)}}
+                  </div> -->
+          </div>
+          <div class="form-group col-md-12">
+            <label>Path to image</label>
+            <input  aria-label="path to image" formControlName="pathToImage"
+              class="form-control" />
+            <!-- <div class="alert alert-danger" *ngIf="user.get('firstName').errors && user.get('firstName').touched">
+                      {{getErrorMessage(user.get('firstName').errors)}}
+                    </div> -->
+          </div>
+        </div>
+        <button class="btn btn-primary btn-space">Save</button>
+        <button class="btn btn-primary btn-space" [routerLink]="['..']">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

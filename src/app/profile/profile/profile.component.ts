@@ -76,4 +76,8 @@ export class ProfileComponent implements OnInit {
   viewAddFriend(){
     this.router.navigate(['profile', 'send-friend-request']);
   }
+
+  viewEditProfile(){
+    this.router.navigate(['profile', 'edit-profile']);
+  }
 }

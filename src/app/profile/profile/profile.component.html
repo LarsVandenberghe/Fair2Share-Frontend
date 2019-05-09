@@ -4,10 +4,11 @@
   <div *ngIf="loggedIn && profile != null" class="row">
     <div class="col-md-4 blank-padding10px">
       <div class="pane-container text-center">
-
-        <img [src]="image" alt="" class="rounded-circle" style="width: 150px; height: 150px;">
-        <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
-
+        <div class="profile">
+            <i class="fa fa-cog fa-2x gear" aria-hidden="true" (click)="viewEditProfile()"></i>
+          <img [src]="image" alt="" class="rounded-circle" style="width: 150px; height: 150px;">
+          <h2>{{profile.firstname + ' ' + profile.lastname}}</h2>
+        </div>
         <div class="friends-nav">
           <a class="friends-nav-title">Friends</a>
           <span class="float-right">
