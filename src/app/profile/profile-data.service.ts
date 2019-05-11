@@ -32,8 +32,20 @@ export class ProfileDataService {
     );
   }
 
-  setSimpleprofile$(simpleProfile: ISimpleProfile):Observable<any>{
+  setSimpleprofile$(simpleProfile: ISimpleProfile): Observable<any> {
     return this.http.put(`${environment.apiUrl}/Profile/simple`, simpleProfile);
 
+  }
+
+  uploadImage$(fileToUpload: any) {
+    let input = new FormData();
+    input.append("file", fileToUpload);
+
+    return this.http
+      .post(`${environment.apiUrl}/Profile/image`, input);
+  }
+
+  getProfileImage$(id : number): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/Profile/image/${id}`, { responseType: 'blob' });
   }
 }

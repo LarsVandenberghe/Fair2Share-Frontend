@@ -14,6 +14,8 @@ import { ActivityDataService } from 'src/app/activity/activity-data.service';
 export class ProfileComponent implements OnInit {
   private _profile : IProfile;
   public errorMessage: string;
+  public imageToShow: any;
+  public isImageLoading : boolean = true;
 
   constructor(
     private dataService: ProfileDataService, 
@@ -23,9 +25,22 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getProfile$().subscribe(
-      profile => this._profile = profile,
+      profile => {
+        this._profile = profile;
+        
+        this.dataService.getProfileImage$(this._profile.profileId).subscribe(
+          data => {
+            this.createImageFromBlob(data);
+            this.isImageLoading = false;
+          }, error => {
+            this.isImageLoading = false;
+            console.log(error);
+          }
+        );
+      },
       err => this.errorMessage = err
     );
+    
   }
 
   get profile() : IProfile{
@@ -34,10 +49,10 @@ export class ProfileComponent implements OnInit {
 
   get image() : string{
     if (this._profile != null){
-      if (this._profile.pathToImage == null || this._profile.pathToImage == '' ){
+      if (this.imageToShow == null ){
         return "/assets/images/default-profile.gif";
       } else {
-        return this._profile.pathToImage;
+        return this.imageToShow;
       }
     } else {
       return null;
@@ -80,4 +95,15 @@ export class ProfileComponent implements OnInit {
   viewEditProfile(){
     this.router.navigate(['profile', 'edit-profile']);
   }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.imageToShow = reader.result;
+    }, false);
+ 
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+ }
 }

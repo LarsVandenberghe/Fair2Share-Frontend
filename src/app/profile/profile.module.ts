@@ -9,6 +9,7 @@ import { AddActivityComponent } from '../activity/add-activity/add-activity.comp
 import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 const routes = [
   { path: '', component: ProfileComponent },
@@ -31,7 +32,8 @@ const routes = [
     AddActivityComponent,
     FriendRequestsComponent,
     AddFriendComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    UploadImageComponent
   ],
   imports: [
     CommonModule,
