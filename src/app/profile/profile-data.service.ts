@@ -48,4 +48,8 @@ export class ProfileDataService {
   getProfileImage$(id : number): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/Profile/image/${id}`, { responseType: 'blob' });
   }
+
+  deleteProfileImage$() {
+    return this.http.delete(`${environment.apiUrl}/Profile/image`);
+  }
 }

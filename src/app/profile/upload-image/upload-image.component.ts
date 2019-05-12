@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ProfileDataService } from '../profile-data.service';
 
 @Component({
@@ -8,22 +8,30 @@ import { ProfileDataService } from '../profile-data.service';
 })
 export class UploadImageComponent implements OnInit {
 
-  constructor(private dataService : ProfileDataService) { }
+  constructor() { }
 
   ngOnInit() {
   }
-
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild("fileInput") fileInput;
 
-addFile(): void {
+  // addFile(fileInput: any): void {
+  //   let fi = fileInput.nativeElement;
+  //   if (fi.files && fi.files[0]) {
+  //     let fileToUpload = fi.files[0];
+  //     this.dataService
+  //       .uploadImage$(fileToUpload)
+  //       .subscribe(res => {
+  //         console.log(res);
+  //       });
+  //   }
+  // }
+
+  onChanged() : void{
     let fi = this.fileInput.nativeElement;
     if (fi.files && fi.files[0]) {
-        let fileToUpload = fi.files[0];
-        this.dataService
-            .uploadImage$(fileToUpload)
-            .subscribe(res => {
-                console.log(res);
-            });
+      let fileToUpload = fi.files[0];
+      this.notify.emit(fileToUpload);
     }
-}
+  }
 }

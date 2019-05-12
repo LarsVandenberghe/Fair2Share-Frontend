@@ -21,7 +21,13 @@
                   </div> -->
           </div>
           <div class="form-group col-md-12">
-              <app-upload-image></app-upload-image>
+              <label>Upload profile picture</label>
+              <div class="card">
+                <div class="card-body">
+                    <app-upload-image (notify)="onNotify($event)"></app-upload-image>
+                </div>
+              </div>
+              
             <!-- <label>Path to image</label>
             <input  aria-label="path to image" formControlName="pathToImage"
               class="form-control" /> -->

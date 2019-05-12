@@ -1,2 +1,2 @@
-<input #fileInput type="file"/>
-<button (click)="addFile()">Add</button>
+<input #fileInput type="file" accept="image/x-png,image/gif,image/jpeg" (change)="onChanged()"/>
+<!-- <button (click)="addFile(fileInput)" class="btn btn-primary">Reset Image</button> -->

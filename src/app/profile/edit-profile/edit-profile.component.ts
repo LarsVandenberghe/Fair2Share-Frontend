@@ -12,6 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EditProfileComponent implements OnInit {
   public simpleProfile: ISimpleProfile;
   public profile: FormGroup;
+  public image: any;
+  public changeImage: boolean = false;
 
   constructor(
     private dataService: ProfileDataService,
@@ -21,11 +23,11 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     this.dataService.getSimpleProfile$().subscribe(
       data => {
-      this.simpleProfile = data;
+        this.simpleProfile = data;
         this.profile = this.fb.group({
           firstName: [this.simpleProfile.firstname],
           lastName: [this.simpleProfile.lastname],
-          pathToImage: [this.simpleProfile.pathToImage]
+          //pathToImage: [this.simpleProfile.pathToImage]
         });
       }
     );
@@ -35,11 +37,45 @@ export class EditProfileComponent implements OnInit {
   onSubmit() {
     this.simpleProfile.firstname = this.profile.value.firstName;
     this.simpleProfile.lastname = this.profile.value.lastName;
-    if (this.profile.value.pathToImage != null && this.profile.value.pathToImage != '') {
-      this.simpleProfile.pathToImage = this.profile.value.pathToImage;
+    // if (this.profile.value.pathToImage != null && this.profile.value.pathToImage != '') {
+    //   this.simpleProfile.pathToImage = this.profile.value.pathToImage;
+    // }
+    if (this.changeImage){
+      if (this.image == null){
+        this.removeImage();
+        this.dataService.setSimpleprofile$(this.simpleProfile).subscribe(
+          () => this.router.navigate(['profile'])
+        );
+      }
+      else {
+        this.addImage(this.image);
+      }
     }
-    this.dataService.setSimpleprofile$(this.simpleProfile).subscribe();
-    this.router.navigate(['profile']);
+  }
+
+  onNotify(image: any) {
+    this.changeImage = true;
+    this.image = image;
+    //console.log("I got here!");
+  }
+
+  onNotifyChangeImage(change : boolean){
+    this.changeImage = change;
+  }
+
+  addImage(fileInput: any): void {
+      this.dataService
+        .uploadImage$(fileInput)
+        .subscribe(res => {
+          console.log(res);
+          this.dataService.setSimpleprofile$(this.simpleProfile).subscribe(
+            () => this.router.navigate(['profile'])
+          );
+        });
+  }
+
+  removeImage() : void {
+    this.dataService.deleteProfileImage$().subscribe();
   }
 
 }
