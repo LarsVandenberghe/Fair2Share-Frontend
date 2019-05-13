@@ -96,7 +96,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['profile', 'edit-profile']);
   }
 
-  createImageFromBlob(image: Blob) {
+  private createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
        this.imageToShow = reader.result;

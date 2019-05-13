@@ -14,6 +14,7 @@ export class EditProfileComponent implements OnInit {
   public profile: FormGroup;
   public image: any;
   public changeImage: boolean = false;
+  public loading : boolean = false;
 
   constructor(
     private dataService: ProfileDataService,
@@ -48,7 +49,9 @@ export class EditProfileComponent implements OnInit {
         );
       }
       else {
+        this.loading = true;
         this.addImage(this.image);
+        this.loading = false;
       }
     }
   }
