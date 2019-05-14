@@ -47,7 +47,7 @@ export class ActivityDataService {
       map( data => {
         var out : ISummary[] = [];
         for(var key in data) {
-          out.push({key : parseInt(key,10), value : parseInt(data[key], 10)});
+          out.push({key : parseInt(key, 10), value : parseFloat(data[key])});
         }
         return out;
       }),
