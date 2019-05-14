@@ -4,6 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IActivity } from '../data_types/IActivity';
+import { ISummary } from '../data_types/ISummary';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,21 @@ export class ActivityDataService {
 
   deleteActivity$(id: number){
     return this.http.delete(`${environment.apiUrl}/Activity/${id}`);
+  }
+
+  getActivitySummary$(id: number) : Observable<ISummary[]>{
+    return this.http.get(`${environment.apiUrl}/Activity/${id}/summary`).pipe(
+      map( data => {
+        var out : ISummary[] = [];
+        for(var key in data) {
+          out.push({key : parseInt(key,10), value : parseInt(data[key], 10)});
+        }
+        return out;
+      }),
+      catchError(error => {
+        this.loadingError$.next(error.statusText);
+        return of(null);
+      })
+    );
   }
 }

@@ -1,8 +1,19 @@
-<div *ngIf="(activity$ | async) as activity">{{activity.name}}</div>
+<div class="container" style="background-color: white;">
+    <div *ngIf="activity">
+        <h1>{{activity.name}}</h1>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Summary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Transactions</a>
+            </li>
+        </ul>
+    </div>
 
-<div *ngIf="errorMessage" class="container">
-    <div class="alert alert-danger">{{errorMessage}}</div>
-    
+    <div *ngIf="errorMessage" class="container">
+        <div class="alert alert-danger">{{errorMessage}}</div>
+    </div>
 </div>
 <!-- <ng-template #noValidAct class="container">
     <div class="alert alert-danger">
