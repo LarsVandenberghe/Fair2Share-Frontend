@@ -1,24 +1,61 @@
-<div class="container" style="background-color: white;">
+<div class="container">
     <div *ngIf="activity">
         <h1>{{activity.name}}</h1>
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Summary</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Transactions</a>
-            </li>
-        </ul>
+        <div class="card">
+            <div class="container">
+                <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                    <div class="col-md-4">
+                        <ul class="list-group">
+                            <li class="list-group-item active">
+                                <h4 class="float-left">Participants</h4>
+                                <button class="float-right border add-button">+</button>
+                            </li>
+                            <li class="list-group-item activity" *ngFor="let part of activity.participants">
+                                <app-friend-list-item [friend]="part"></app-friend-list-item>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a [className]="toggleSummary? 'nav-link active' : 'nav-link'"
+                                    (click)="toggleSummary = true">Summary</a>
+                            </li>
+                            <li class="nav-item">
+                                <a [className]="toggleSummary? 'nav-link' : 'nav-link active'"
+                                    (click)="toggleSummary = false">Transactions</a>
+                            </li>
+                        </ul>
+                        <div class="" *ngIf="toggleSummary">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Participant</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let participant of summary">
+                                        <td>
+                                            <app-friend-list-item [friend]="getIFriendForId(participant.key)">
+                                            </app-friend-list-item>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            <span [style.color]="participant.value >= 0? '#28a745' : '#bd2130'">
+                                                {{formatMoney(participant.value)}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div *ngIf="errorMessage" class="container">
         <div class="alert alert-danger">{{errorMessage}}</div>
     </div>
 </div>
-<!-- <ng-template #noValidAct class="container">
-    <div class="alert alert-danger">
-        Invalid action!
-    </div>
-</ng-template> 
-; else noValidAct
--->

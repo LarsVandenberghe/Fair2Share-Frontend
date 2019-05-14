@@ -40,8 +40,8 @@ export class AddActivityComponent implements OnInit {
       this.valutas.indexOf(this.activity.value.valuta)
     ).subscribe(
       val => {
-        this.dataService.localActivityId = val;
-        this.router.navigate(['profile', 'activity']);
+        //this.dataService.localActivityId = val;
+        this.router.navigate(['profile', 'activity', val]);
       }
     )
   }

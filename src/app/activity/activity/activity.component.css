@@ -1,0 +1,14 @@
+.add-button{
+    width: 30px; 
+    height: 30px; 
+    text-align: center; 
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 0.3em;
+    background-color: rgba(0,0,0,0);
+    color: white;
+  }
+  
+  .add-button:hover{
+    background-color: rgba(255, 255, 255, 0.4);
+  }

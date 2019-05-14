@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../user/authentication.service';
 import { Router } from '@angular/router';
 import { IActivity } from '../../data_types/IActivity';
 import { ActivityDataService } from 'src/app/activity/activity-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
     private authService : AuthenticationService, 
     private router: Router,
     private activityService: ActivityDataService) { }
+    
 
   ngOnInit() {
     this.dataService.getProfile$().subscribe(
@@ -69,7 +71,7 @@ export class ProfileComponent implements OnInit {
 
   onEditActivity(activity : IActivity){
     this.activityService.localActivityId = activity.activityId;
-    this.router.navigate(['profile', 'activity']);
+    this.router.navigate(['profile', 'activity', activity.activityId]);
   }
 
   onDeleteActivity(activity : IActivity){
@@ -81,6 +83,14 @@ export class ProfileComponent implements OnInit {
         //   err => this.errorMessage = err
         // );
         this._profile.activities = this.profile.activities.filter(e => e.activityId !== activity.activityId);
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+        if (err.error instanceof Error) {
+          this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = err.error;
+        }
       });
   }
 

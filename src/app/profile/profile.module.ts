@@ -10,6 +10,9 @@ import { FriendRequestsComponent } from './friend-requests/friend-requests.compo
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { ActivityModule } from '../activity/activity.module';
+import { AppModule } from '../app.module';
+import { SharedModule } from '../shared/shared.module';
 
 const routes = [
   { path: '', component: ProfileComponent },
@@ -28,7 +31,7 @@ const routes = [
   declarations: [
     ActivityListComponent,
     ProfileComponent,
-    FriendListItemComponent,
+    //FriendListItemComponent,
     AddActivityComponent,
     FriendRequestsComponent,
     AddFriendComponent,
@@ -38,6 +41,7 @@ const routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })

@@ -1,6 +1,8 @@
 <div class="container-fluid">
 
-
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
   <div *ngIf="loggedIn && profile != null" class="row">
     <div class="col-md-4 blank-padding10px">
       <div class="pane-container text-center">

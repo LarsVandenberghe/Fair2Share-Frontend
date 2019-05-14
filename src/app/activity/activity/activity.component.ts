@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, tap, flatMap } from 'rxjs/operators';
 import { ActivityDataService } from '../activity-data.service';
 import { ISummary } from 'src/app/data_types/ISummary';
+import { IFriend } from 'src/app/data_types/IFriend';
 
 @Component({
   selector: 'app-activity',
@@ -15,31 +16,42 @@ export class ActivityComponent implements OnInit {
   public activity: IActivity;
   public errorMessage : string;
   public summary : ISummary[]
+  public toggleSummary : boolean = true;
 
-  constructor(private dataService: ActivityDataService, private router : Router) { }
+  constructor(private dataService: ActivityDataService, private router : Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.dataService.localActivityId == null){
-      this.errorMessage = "Invalid action, please select an activity on your profile!"
-    } else {
-      this.dataService.getActivity$(this.dataService.localActivityId).subscribe(data => {
-        this.activity = data;
-        this.dataService.getActivitySummary$(data.activityId).subscribe(data2 => {
-          this.summary = data2;
+    // if (this.dataService.localActivityId == null){
+    //   this.errorMessage = "Invalid action, please select an activity on your profile!"
+    // } else {
+      this.route.params.subscribe(params => {
+        this.dataService.getActivity$(+params['id']).subscribe(data => {
+          this.activity = data;
+          this.dataService.getActivitySummary$(data.activityId).subscribe(data2 => {
+            this.summary = data2;
+          });
         });
-      });
-    }
-    
-    // this.activatedRoute.paramMap.pipe(
-    //   (a: IActivity) => this.dataService.getActivity$(a.activityId))
-    // ).subscribe(act => {
-    //   this._activity$ = act;
-    //   console.log("TODO: page not found!");
-    // });
-    // this._activity$ = {name: "test", activityId: 0, description: "", currencyType: 1, participants: []};
+     });
+      // this.dataService.getActivity$(this.dataService.localActivityId).subscribe(data => {
+      //   this.activity = data;
+      //   this.dataService.getActivitySummary$(data.activityId).subscribe(data2 => {
+      //     this.summary = data2;
+      //   });
+      // });
+    // }
   }
 
-  // public get activity$(): Observable<IActivity>{
-  //   return this._activity$;
-  // }
+  getIFriendForId(id : number) : IFriend{
+    return this.activity.participants.find(p => p.profileId === id);
+  }
+
+  formatMoney(value: number) : string{
+    if (this.activity.currencyType === 0){
+      return `€ ${Number(value).toFixed(2)}`;
+    } else if (this.activity.currencyType === 1){
+      return `$ ${Number(value).toFixed(2)}`;
+    } else if (this.activity.currencyType === 2){
+      return `£ ${Number(value).toFixed(2)}`;
+    }
+  }
 }

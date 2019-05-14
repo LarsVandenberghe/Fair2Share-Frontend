@@ -26,6 +26,6 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule
   ],
   providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
