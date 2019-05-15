@@ -23,9 +23,12 @@
             <div class="card">
               <div class="card-body">
                   <app-upload-image (notify)="onNotify($event)"></app-upload-image>
+                  <a class="btn btn-danger btn-space text-light" (click)="changeImage = true">Remove</a>
               </div>
             </div>
-
+            <div class="alert alert-danger" *ngIf="changeImage">
+              Image settings will be saved after clicking save.
+            </div>
             <!-- <label>Path to image</label>
             <input  aria-label="path to image" formControlName="pathToImage"
               class="form-control" /> -->

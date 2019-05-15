@@ -1,0 +1,79 @@
+import { Component, OnInit } from '@angular/core';
+import { ProfileDataService } from 'src/app/profile/profile-data.service';
+import { ActivityDataService } from '../activity-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { IFriend } from 'src/app/data_types/IFriend';
+import { IActivity } from 'src/app/data_types/IActivity';
+
+@Component({
+  //selector: 'app-manage-participants',
+  templateUrl: './manage-participants.component.html',
+  styleUrls: ['./manage-participants.component.css']
+})
+export class ManageParticipantsComponent implements OnInit {
+  public allFriends: IFriend[] = [];
+  public activityMembers: IFriend[] = [];
+  public toBeAdded: IFriend[] = [];
+  public toBeRemoved: IFriend[] = [];
+  public activity: IActivity;
+  public myId : number;
+
+  constructor(
+    private profileDataService: ProfileDataService,
+    private dataService: ActivityDataService,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    if (this.dataService.localActivity) {
+      this.activity = this.dataService.localActivity
+      this.activityMembers = this.activity.participants;
+      this.profileDataService.getProfile$().subscribe(data => {
+        this.allFriends = data.friends;
+        this.myId = data.profileId;
+      });
+    } else {
+      this.route.params.subscribe(params => {
+        this.dataService.getActivity$(+params['id']).subscribe(data => {
+          this.activity = data;
+          this.activityMembers = this.activity.participants;
+          this.profileDataService.getProfile$().subscribe(data2 => {
+            this.allFriends = data2.friends;
+            this.myId = data2.profileId;
+          });
+        });
+      });
+    }
+  }
+
+  getInActivity(): IFriend[] {
+    return this.activityMembers.filter(a => this.toBeRemoved.filter(b => a.profileId === b.profileId).length === 0).concat(this.toBeAdded);
+  }
+
+  getNotInActivity(): IFriend[] {
+    var out: IFriend[] = this.allFriends.filter(f => this.getInActivity().filter(p => p.profileId === f.profileId).length === 0);
+    return out;
+  }
+
+  addToToBeAdded(friend: IFriend) {
+    if (this.toBeRemoved.filter(p => p.profileId === friend.profileId).length > 0) {
+      var index = this.toBeRemoved.map(e => e.profileId).indexOf(friend.profileId);
+      if (index !== -1) this.toBeRemoved.splice(index, 1);
+    } else {
+      this.toBeAdded.push(friend);
+    }
+  }
+
+  addToToBeRemoved(friend: IFriend) {
+    if (this.toBeAdded.filter(p => p.profileId === friend.profileId).length > 0) {
+      var index = this.toBeAdded.map(e => e.profileId).indexOf(friend.profileId);
+      if (index !== -1) this.toBeAdded.splice(index, 1);
+    } else {
+      this.toBeRemoved.push(friend);
+    }
+  }
+
+  save(){
+    
+  }
+}

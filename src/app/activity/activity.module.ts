@@ -6,14 +6,17 @@ import { ActivityComponent } from './activity/activity.component';
 import { RouterModule } from '@angular/router';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
+import { ManageParticipantsComponent } from './manage-participants/manage-participants.component';
 
 const routes = [
-  { path: ':id', component: ActivityComponent }
+  { path: ':id', component: ActivityComponent },
+  { path: ':id/participants', component: ManageParticipantsComponent }
 ];
 
 @NgModule({
   declarations: [
-    ActivityComponent
+    ActivityComponent,
+    ManageParticipantsComponent
   ],
   imports: [
     CommonModule,

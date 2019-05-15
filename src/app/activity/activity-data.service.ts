@@ -11,7 +11,7 @@ import { ISummary } from '../data_types/ISummary';
 })
 export class ActivityDataService {
   public loadingError$ = new Subject<string>();
-  public localActivityId : number;
+  public localActivity : IActivity;
   constructor(private http: HttpClient) { }
 
   addActivity$(

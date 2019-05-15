@@ -54,4 +54,9 @@ export class ActivityComponent implements OnInit {
       return `£ ${Number(value).toFixed(2)}`;
     }
   }
+
+  goToManageParticipants() : void {
+    this.dataService.localActivity = this.activity;
+    this.router.navigate(['profile', 'activity', this.activity.activityId, 'participants']);
+  }
 }

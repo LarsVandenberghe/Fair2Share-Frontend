@@ -8,7 +8,8 @@
                         <ul class="list-group">
                             <li class="list-group-item active">
                                 <h4 class="float-left">Participants</h4>
-                                <button class="float-right border add-button">+</button>
+                                <!-- <button class="float-right border add-button">+</button> -->
+                                <button class="float-right border add-button" (click)="goToManageParticipants()"><i class="fa fa-cog gear" aria-hidden="true"></i></button>
                             </li>
                             <li class="list-group-item activity" *ngFor="let part of activity.participants">
                                 <app-friend-list-item [friend]="part"></app-friend-list-item>

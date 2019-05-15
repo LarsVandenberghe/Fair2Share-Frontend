@@ -53,6 +53,10 @@ export class EditProfileComponent implements OnInit {
         this.addImage(this.image);
         this.loading = false;
       }
+    } else {
+      this.dataService.setSimpleprofile$(this.simpleProfile).subscribe(
+        () => this.router.navigate(['profile'])
+      );
     }
   }
 

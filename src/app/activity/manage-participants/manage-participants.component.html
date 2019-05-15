@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Manage Participants</h1>
+  <div class="card">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item active">
+              <h4 class="float-left">Friends not in Activity</h4>
+            </li>
+            <li class="list-group-item activity" *ngFor="let friend of getNotInActivity()">
+              <app-friend-list-item [friend]="friend"></app-friend-list-item>
+              <span class="float-right btn btn-success" style="margin-top: 5px;" (click)="addToToBeAdded(friend)">Add</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item active">
+              <h4 class="float-left">Participants</h4>
+            </li>
+            <li class="list-group-item activity" *ngFor="let part of getInActivity()">
+              <app-friend-list-item [friend]="part"></app-friend-list-item>
+              <span *ngIf="myId !== part.profileId" class="float-right btn btn-danger" style="margin-top: 5px;"(click)="addToToBeRemoved(part)">Delete</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <button class="btn btn-primary btn-space">Save</button>
+      <button class="btn btn-primary btn-space" [routerLink]="['..']">Cancel</button>
+    </div>
+  </div>
+</div>
