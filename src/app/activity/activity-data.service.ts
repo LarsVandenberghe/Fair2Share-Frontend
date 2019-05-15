@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { IActivity } from '../data_types/IActivity';
 import { ISummary } from '../data_types/ISummary';
 import { IFriend } from '../data_types/IFriend';
+import { ITransaction } from '../data_types/ITransaction';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,9 @@ export class ActivityDataService {
     return this.http.post(`${environment.apiUrl}/Activity/${id}/participants`,
       parts.map(e => e.profileId)
    );
+  }
+
+  getTransactions$(id : number) : Observable<ITransaction[]>{
+    return this.http.get<ITransaction[]>(`${environment.apiUrl}/Activity/${id}/transactions`);
   }
 }

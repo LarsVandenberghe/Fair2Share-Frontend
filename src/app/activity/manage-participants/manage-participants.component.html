@@ -31,6 +31,9 @@
         </div>
 
       </div>
+      <div *ngIf="errorMesage" class="alert alert-danger">
+        {{errorMesage}}
+      </div>
       <button class="btn btn-primary btn-space" (click)="save()">Save</button>
       <button class="btn btn-primary btn-space" [routerLink]="['..']">Cancel</button>
     </div>

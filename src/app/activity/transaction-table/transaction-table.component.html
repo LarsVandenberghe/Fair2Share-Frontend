@@ -1,0 +1,23 @@
+<table class="table table-bordered">
+  <thead>
+      <tr>
+          <th scope="col">Transaction</th>
+          <th scope="col">Paid By</th>
+          <th scope="col">Amount</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let transaction of transactions">
+          <td style="vertical-align: middle;">
+              {{transaction.name}}
+          </td>
+          <td style="vertical-align: middle;">
+            <app-friend-list-item [friend]="transaction.paidBy">
+            </app-friend-list-item>
+          </td>
+          <td style="vertical-align: middle;">
+            {{formatMoney(transaction.payment)}}
+        </td>
+      </tr>
+  </tbody>
+</table>

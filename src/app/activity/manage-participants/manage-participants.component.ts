@@ -17,6 +17,7 @@ export class ManageParticipantsComponent implements OnInit {
   public toBeRemoved: IFriend[] = [];
   public activity: IActivity;
   public myId : number;
+  public errorMesage : string;
 
   constructor(
     private profileDataService: ProfileDataService,
@@ -82,11 +83,15 @@ export class ManageParticipantsComponent implements OnInit {
         .subscribe(() => {
           this.router.navigate(['profile', 'activity', this.activity.activityId]);
         });
+      }, err => {
+        this.errorMesage = err.error;
       });
     } else if (this.toBeRemoved.length>0) {
       this.dataService.removeParticipantsFromActivity$(this.activity.activityId, this.toBeRemoved)
       .subscribe(() => {
           this.router.navigate(['profile', 'activity', this.activity.activityId]);
+      }, err => {
+        this.errorMesage = err.error;
       });
     } else if (this.toBeAdded.length>0){
       this.dataService.addParticipantsToActivity$(this.activity.activityId,this.toBeAdded)

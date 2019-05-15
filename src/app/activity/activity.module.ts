@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
 import { ManageParticipantsComponent } from './manage-participants/manage-participants.component';
+import { TransactionTableComponent } from './transaction-table/transaction-table.component';
+import { SummaryTableComponent } from './summary-table/summary-table.component';
 
 const routes = [
   { path: ':id', component: ActivityComponent },
@@ -16,7 +18,9 @@ const routes = [
 @NgModule({
   declarations: [
     ActivityComponent,
-    ManageParticipantsComponent
+    ManageParticipantsComponent,
+    TransactionTableComponent,
+    SummaryTableComponent
   ],
   imports: [
     CommonModule,

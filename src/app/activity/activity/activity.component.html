@@ -28,7 +28,7 @@
                             </li>
                         </ul>
                         <div class="" *ngIf="toggleSummary">
-                            <table class="table table-bordered">
+                            <!-- <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">Participant</th>
@@ -48,7 +48,11 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> -->
+                            <app-summary-table [activity]="activity"></app-summary-table>
+                        </div>
+                        <div *ngIf="!toggleSummary">
+                            <app-transaction-table [activity]="activity"></app-transaction-table>
                         </div>
                     </div>
                 </div>

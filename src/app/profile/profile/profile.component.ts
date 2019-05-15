@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onEditActivity(activity : IActivity){
-    this.activityService.localActivityId = activity.activityId;
+    //this.activityService.localActivityId = activity.activityId;
     this.router.navigate(['profile', 'activity', activity.activityId]);
   }
 
