@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileDataService } from 'src/app/profile/profile-data.service';
 import { ActivityDataService } from '../activity-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IFriend } from 'src/app/data_types/IFriend';
 import { IActivity } from 'src/app/data_types/IActivity';
 
@@ -21,7 +21,8 @@ export class ManageParticipantsComponent implements OnInit {
   constructor(
     private profileDataService: ProfileDataService,
     private dataService: ActivityDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -74,6 +75,26 @@ export class ManageParticipantsComponent implements OnInit {
   }
 
   save(){
-    
+    if (this.toBeRemoved.length>0 && this.toBeAdded.length>0){
+      this.dataService.removeParticipantsFromActivity$(this.activity.activityId, this.toBeRemoved)
+      .subscribe(() => {
+        this.dataService.addParticipantsToActivity$(this.activity.activityId,this.toBeAdded)
+        .subscribe(() => {
+          this.router.navigate(['profile', 'activity', this.activity.activityId]);
+        });
+      });
+    } else if (this.toBeRemoved.length>0) {
+      this.dataService.removeParticipantsFromActivity$(this.activity.activityId, this.toBeRemoved)
+      .subscribe(() => {
+          this.router.navigate(['profile', 'activity', this.activity.activityId]);
+      });
+    } else if (this.toBeAdded.length>0){
+      this.dataService.addParticipantsToActivity$(this.activity.activityId,this.toBeAdded)
+      .subscribe(() => {
+        this.router.navigate(['profile', 'activity', this.activity.activityId]);
+      });
+    } else {
+      this.router.navigate(['profile', 'activity', this.activity.activityId]);
+    }
   }
 }

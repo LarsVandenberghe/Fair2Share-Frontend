@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IActivity } from '../data_types/IActivity';
 import { ISummary } from '../data_types/ISummary';
+import { IFriend } from '../data_types/IFriend';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,20 @@ export class ActivityDataService {
         return of(null);
       })
     );
+  }
+
+  removeParticipantsFromActivity$(id : number, parts : IFriend[]) : Observable<any>{
+    var params : string = "?";
+    params += parts.map(e => `friend_ids=${e.profileId}`).join('&');
+    return this.http.delete(`${environment.apiUrl}/Activity/${id}/participants${params}`
+   );
+  }
+
+  addParticipantsToActivity$(id : number, parts : IFriend[]) : Observable<any>{
+    var params : string = "?";
+    params += parts.map(e => `friend_ids=${e.profileId}`).join('&');
+    return this.http.post(`${environment.apiUrl}/Activity/${id}/participants`,
+      parts.map(e => e.profileId)
+   );
   }
 }

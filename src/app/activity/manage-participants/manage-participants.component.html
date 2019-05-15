@@ -12,6 +12,9 @@
               <app-friend-list-item [friend]="friend"></app-friend-list-item>
               <span class="float-right btn btn-success" style="margin-top: 5px;" (click)="addToToBeAdded(friend)">Add</span>
             </li>
+            <li class="list-group-item" *ngIf="getNotInActivity().length == 0">
+                All your friends are in this activity.
+            </li>
           </ul>
         </div>
 
@@ -28,7 +31,7 @@
         </div>
 
       </div>
-      <button class="btn btn-primary btn-space">Save</button>
+      <button class="btn btn-primary btn-space" (click)="save()">Save</button>
       <button class="btn btn-primary btn-space" [routerLink]="['..']">Cancel</button>
     </div>
   </div>
