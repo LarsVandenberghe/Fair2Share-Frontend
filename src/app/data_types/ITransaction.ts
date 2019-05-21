@@ -3,11 +3,11 @@ import { IFriend } from './IFriend';
 import { Time } from '@angular/common';
 
 export interface ITransaction{
-    transactionId: number,
+    transactionId?: number,
     name: string,
     description?: string,
-    timeStamp: Time,
+    timeStamp?: Time,
     payment : number,
-    profilesInTransaction : IFriend[],
+    profilesInTransaction? : IFriend[],
     paidBy : IFriend
 }

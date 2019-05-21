@@ -26,13 +26,6 @@ export class SummaryTableComponent implements OnInit {
   }
 
   formatMoney(value: number) : string{
-    if (this.activity.currencyType === 0){
-      return `€ ${Number(value).toFixed(2)}`;
-    } else if (this.activity.currencyType === 1){
-      return `$ ${Number(value).toFixed(2)}`;
-    } else if (this.activity.currencyType === 2){
-      return `£ ${Number(value).toFixed(2)}`;
-    }
+    return this.dataService.currencyTypeSymbol(this.activity.currencyType) + ` ${Number(value).toFixed(2)}`;
   }
-
 }

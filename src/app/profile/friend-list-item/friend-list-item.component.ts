@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IFriend } from '../../data_types/IFriend';
 import { ProfileDataService } from '../profile-data.service';
+import { IImageProfileInter } from 'src/app/data_types/IImageProfileInter';
 
 @Component({
   selector: 'app-friend-list-item',
@@ -17,6 +18,10 @@ export class FriendListItemComponent implements OnInit {
   ngOnInit() {
     this.dataService.getProfileImage$(this.friend.profileId).subscribe(
       data => {
+        if (data != null){
+          var modal: IImageProfileInter = { image: data, profileId: this.friend.profileId };
+          this.dataService.imageCatch.push(modal);
+        }
         this.createImageFromBlob(data);
         this.isImageLoading = false;
       }, error => {

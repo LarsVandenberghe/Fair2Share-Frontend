@@ -16,26 +16,27 @@ export class ManageParticipantsComponent implements OnInit {
   public toBeAdded: IFriend[] = [];
   public toBeRemoved: IFriend[] = [];
   public activity: IActivity;
-  public myId : number;
-  public errorMesage : string;
+  public myId: number;
+  public errorMesage: string;
 
   constructor(
     private profileDataService: ProfileDataService,
     private dataService: ActivityDataService,
     private route: ActivatedRoute,
-    private router : Router
+    private router: Router
   ) { }
 
   ngOnInit() {
-    if (this.dataService.localActivity) {
-      this.activity = this.dataService.localActivity
-      this.activityMembers = this.activity.participants;
-      this.profileDataService.getProfile$().subscribe(data => {
-        this.allFriends = data.friends;
-        this.myId = data.profileId;
-      });
-    } else {
-      this.route.params.subscribe(params => {
+
+    this.route.params.subscribe(params => {
+      if (this.dataService.localActivity && this.dataService.localActivity.activityId === +params['id']) {
+        this.activity = this.dataService.localActivity
+        this.activityMembers = this.activity.participants;
+        this.profileDataService.getProfile$().subscribe(data => {
+          this.allFriends = data.friends;
+          this.myId = data.profileId;
+        });
+      } else {
         this.dataService.getActivity$(+params['id']).subscribe(data => {
           this.activity = data;
           this.activityMembers = this.activity.participants;
@@ -44,8 +45,8 @@ export class ManageParticipantsComponent implements OnInit {
             this.myId = data2.profileId;
           });
         });
-      });
-    }
+      }
+    });
   }
 
   getInActivity(): IFriend[] {
@@ -75,29 +76,29 @@ export class ManageParticipantsComponent implements OnInit {
     }
   }
 
-  save(){
-    if (this.toBeRemoved.length>0 && this.toBeAdded.length>0){
+  save() {
+    if (this.toBeRemoved.length > 0 && this.toBeAdded.length > 0) {
       this.dataService.removeParticipantsFromActivity$(this.activity.activityId, this.toBeRemoved)
-      .subscribe(() => {
-        this.dataService.addParticipantsToActivity$(this.activity.activityId,this.toBeAdded)
+        .subscribe(() => {
+          this.dataService.addParticipantsToActivity$(this.activity.activityId, this.toBeAdded)
+            .subscribe(() => {
+              this.router.navigate(['profile', 'activity', this.activity.activityId]);
+            });
+        }, err => {
+          this.errorMesage = err.error;
+        });
+    } else if (this.toBeRemoved.length > 0) {
+      this.dataService.removeParticipantsFromActivity$(this.activity.activityId, this.toBeRemoved)
+        .subscribe(() => {
+          this.router.navigate(['profile', 'activity', this.activity.activityId]);
+        }, err => {
+          this.errorMesage = err.error;
+        });
+    } else if (this.toBeAdded.length > 0) {
+      this.dataService.addParticipantsToActivity$(this.activity.activityId, this.toBeAdded)
         .subscribe(() => {
           this.router.navigate(['profile', 'activity', this.activity.activityId]);
         });
-      }, err => {
-        this.errorMesage = err.error;
-      });
-    } else if (this.toBeRemoved.length>0) {
-      this.dataService.removeParticipantsFromActivity$(this.activity.activityId, this.toBeRemoved)
-      .subscribe(() => {
-          this.router.navigate(['profile', 'activity', this.activity.activityId]);
-      }, err => {
-        this.errorMesage = err.error;
-      });
-    } else if (this.toBeAdded.length>0){
-      this.dataService.addParticipantsToActivity$(this.activity.activityId,this.toBeAdded)
-      .subscribe(() => {
-        this.router.navigate(['profile', 'activity', this.activity.activityId]);
-      });
     } else {
       this.router.navigate(['profile', 'activity', this.activity.activityId]);
     }

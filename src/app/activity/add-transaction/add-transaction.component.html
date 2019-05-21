@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Add transaction</h1>
+  <form [formGroup]="transaction" (ngSubmit)="onSubmit()" *ngIf="activity">
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label>Name*</label>
+            <input placeholder="name" aria-label="name" formControlName="name" class="form-control" />
+          </div>
+          <div class="form-group col-md-3">
+              <label>Payment* (in {{getValutaSymbol()}})</label>
+              <input type="number" min="0" step=".01" aria-label="payment" formControlName="payment"
+                class="form-control" />
+            </div>
+            <div class="form-group col-md-4">
+              <label>Paid By*</label>
+              <select formControlName="paidBy" aria-label="paidBy" class="form-control select">
+                <option [ngValue]="part" *ngFor="let part of activity.participants">{{part.firstname + ' ' + part.lastname}}</option>
+              </select>
+            </div>
+          <div class="form-group col-md-12">
+            <label>Description</label>
+            <input placeholder="description" aria-label="description" formControlName="description" class="form-control" />
+          </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-space">
+      Make Transaction
+    </button>
+    <button (click)="handleCancle()" class="btn btn-primary btn-space">
+      Cancel
+    </button>
+  </form>
+</div>

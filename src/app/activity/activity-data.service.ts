@@ -78,4 +78,18 @@ export class ActivityDataService {
   getTransactions$(id : number) : Observable<ITransaction[]>{
     return this.http.get<ITransaction[]>(`${environment.apiUrl}/Activity/${id}/transactions`);
   }
+
+  addTransaction$(id: number, transaction : ITransaction){
+    return this.http.post(`${environment.apiUrl}/Activity/${id}/transactions`, transaction);
+  }
+
+  currencyTypeSymbol(currencyType: number) : string{
+    if (currencyType === 0){
+      return `€`;
+    } else if (currencyType === 1){
+      return `$`;
+    } else if (currencyType === 2){
+      return `£`;
+    }
+  }
 }

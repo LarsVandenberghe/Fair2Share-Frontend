@@ -38,9 +38,7 @@ export class EditProfileComponent implements OnInit {
   onSubmit() {
     this.simpleProfile.firstname = this.profile.value.firstName;
     this.simpleProfile.lastname = this.profile.value.lastName;
-    // if (this.profile.value.pathToImage != null && this.profile.value.pathToImage != '') {
-    //   this.simpleProfile.pathToImage = this.profile.value.pathToImage;
-    // }
+
     if (this.changeImage){
       if (this.image == null){
         this.removeImage();
@@ -82,6 +80,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   removeImage() : void {
+    var index = this.dataService.imageCatch.map( e => e.profileId).indexOf(this.simpleProfile.profileId);
+    if (index !== -1) this.dataService.imageCatch.splice(index, 1);
     this.dataService.deleteProfileImage$().subscribe();
   }
 

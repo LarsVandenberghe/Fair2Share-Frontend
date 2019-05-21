@@ -19,12 +19,12 @@ export class ActivityComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.dataService.getActivity$(+params['id']).subscribe(data => {
           this.activity = data;
+          this.dataService.localActivity = this.activity;
         });
      });
   }
 
   goToManageParticipants() : void {
-    this.dataService.localActivity = this.activity;
     this.router.navigate(['profile', 'activity', this.activity.activityId, 'participants']);
   }
 }

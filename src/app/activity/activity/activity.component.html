@@ -28,27 +28,6 @@
                             </li>
                         </ul>
                         <div class="" *ngIf="toggleSummary">
-                            <!-- <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Participant</th>
-                                        <th scope="col">Balance</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let participant of summary">
-                                        <td>
-                                            <app-friend-list-item [friend]="getIFriendForId(participant.key)">
-                                            </app-friend-list-item>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <span [style.color]="participant.value >= 0? '#28a745' : '#bd2130'">
-                                                {{formatMoney(participant.value)}}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table> -->
                             <app-summary-table [activity]="activity"></app-summary-table>
                         </div>
                         <div *ngIf="!toggleSummary">

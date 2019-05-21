@@ -5,12 +5,14 @@ import { environment } from 'src/environments/environment';
 import { IProfile } from '../data_types/IProfile';
 import { ISimpleProfile } from '../data_types/ISimpleProfile';
 import { catchError, map, tap } from 'rxjs/operators';
+import { IImageProfileInter } from '../data_types/IImageProfileInter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileDataService {
   public loadingError$ = new Subject<string>();
+  public imageCatch : IImageProfileInter[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -46,7 +48,13 @@ export class ProfileDataService {
   }
 
   getProfileImage$(id : number): Observable<Blob> {
-    return this.http.get(`${environment.apiUrl}/Profile/image/${id}`, { responseType: 'blob' });
+    var temp : IImageProfileInter[] = this.imageCatch.filter(i => i.profileId === id);
+    if (temp.length > 0){
+      return Observable.create(obs => obs.next(temp.pop().image));
+    } else {
+      return this.http.get(`${environment.apiUrl}/Profile/image/${id}`, { responseType: 'blob' });
+    }
+    
   }
 
   deleteProfileImage$() {

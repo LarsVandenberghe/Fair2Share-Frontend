@@ -1,3 +1,12 @@
+
+<div class="row">
+  <div class="col-12">
+      <div class="nav justify-content-end" style="background-color: #007bff;">
+          <button class="float-right border add-button" style="margin: 5px;" (click)="addTransaction()">+</button>
+      </div>
+  </div>
+</div>
+
 <table class="table table-bordered">
   <thead>
       <tr>
@@ -7,7 +16,7 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let transaction of transactions">
+      <tr *ngFor="let transaction of transactions" class="transaction">
           <td style="vertical-align: middle;">
               {{transaction.name}}
           </td>
