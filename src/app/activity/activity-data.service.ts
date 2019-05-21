@@ -68,8 +68,6 @@ export class ActivityDataService {
   }
 
   addParticipantsToActivity$(id : number, parts : IFriend[]) : Observable<any>{
-    var params : string = "?";
-    params += parts.map(e => `friend_ids=${e.profileId}`).join('&');
     return this.http.post(`${environment.apiUrl}/Activity/${id}/participants`,
       parts.map(e => e.profileId)
    );
@@ -83,6 +81,21 @@ export class ActivityDataService {
     return this.http.post(`${environment.apiUrl}/Activity/${id}/transactions`, transaction);
   }
 
+
+  removeParticipantsFromTransaction$(id : number, transactionId: number, parts : IFriend[]) : Observable<any>{
+    var params : string = "?";
+    params += parts.map(e => `friend_ids=${e.profileId}`).join('&');
+    return this.http.delete(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}/participants${params}`
+   );
+  }
+
+  addParticipantsToTransaction$(id : number, transactionId: number, parts : IFriend[]) : Observable<any>{
+    console.log(`${environment.apiUrl}/Activity/${id}/transactions​/${transactionId}​/participants`);
+    return this.http.post(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}/participants/`,  
+      parts.map(e => e.profileId)
+   );
+  }
+
   currencyTypeSymbol(currencyType: number) : string{
     if (currencyType === 0){
       return `€`;
@@ -92,4 +105,6 @@ export class ActivityDataService {
       return `£`;
     }
   }
+
+  // /api​/Activity​/{id}​/transactions​/{transaction_id}​/participants
 }

@@ -32,4 +32,8 @@ export class TransactionTableComponent implements OnInit {
   addTransaction(){
     this.router.navigate(["profile", "activity", this.activity.activityId, "add-transaction"]);
   }
+
+  viewTransaction(id : number){
+    this.router.navigate(["profile", "activity", this.activity.activityId, "transaction", id]);
+  }
 }

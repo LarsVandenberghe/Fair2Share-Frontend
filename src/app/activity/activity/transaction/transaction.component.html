@@ -1,0 +1,12 @@
+<div class="container" *ngIf="transaction">
+  <h1 style="margin-top: 1em;">{{transaction.name}}</h1>
+  <h3 *ngIf="transaction.description">{{transaction.description}}</h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-8">
+      <app-manage-tparticipants [transaction]="transaction" [activity]="activity"></app-manage-tparticipants>  
+    </div>
+  </div>
+  
+</div>
+

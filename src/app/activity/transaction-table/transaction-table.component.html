@@ -16,7 +16,7 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let transaction of transactions" class="transaction">
+      <tr *ngFor="let transaction of transactions" class="transaction" (click)="viewTransaction(transaction.transactionId)">
           <td style="vertical-align: middle;">
               {{transaction.name}}
           </td>

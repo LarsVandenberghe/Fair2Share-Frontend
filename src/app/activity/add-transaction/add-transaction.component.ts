@@ -47,7 +47,7 @@ export class AddTransactionComponent implements OnInit {
       paidBy: this.transaction.value.paidBy
   };
     this.activityDataService.addTransaction$(this.activity.activityId, modal).subscribe(
-      () => this.router.navigate(['profile', 'activity', this.activity.activityId])
+      ( id : number ) => this.router.navigate(['profile', 'activity', this.activity.activityId, 'transaction', id])
     );
   }
 

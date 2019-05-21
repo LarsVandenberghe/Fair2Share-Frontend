@@ -1,6 +1,8 @@
 <div class="container">
     <div *ngIf="activity">
-        <h1>{{activity.name}}</h1>
+        <h1 style="margin-top: 1em;">{{activity.name}}</h1>
+        <h3 *ngIf="activity.description">{{activity.description}}</h3>
+        <hr>
         <div class="card">
             <div class="container">
                 <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
