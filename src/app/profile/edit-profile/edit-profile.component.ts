@@ -53,7 +53,7 @@ export class EditProfileComponent implements OnInit {
       else {
         this.loading = true;
         this.addImage(this.image);
-        this.loading = false;
+        
       }
     } else {
       this.dataService.setSimpleprofile$(this.simpleProfile).subscribe(
@@ -83,9 +83,9 @@ export class EditProfileComponent implements OnInit {
       this.dataService
         .uploadImage$(fileInput)
         .subscribe(res => {
-          console.log(res);
+          //console.log(res);
           this.dataService.setSimpleprofile$(this.simpleProfile).subscribe(
-            () => this.router.navigate(['profile'])
+            () => {this.router.navigate(['profile']); this.loading = false;}
           );
         });
   }

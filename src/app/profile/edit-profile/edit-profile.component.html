@@ -24,7 +24,8 @@
               <div class="card-body">
                   <app-upload-image (notify)="onNotify($event)"></app-upload-image>
                   <a class="btn btn-danger btn-space text-light" (click)="changeImage = true">Remove</a>
-              </div>
+            </div>
+
             </div>
             <div class="alert alert-warning" *ngIf="changeImage">
               Image settings will be saved after clicking save.
@@ -35,8 +36,13 @@
           Error while trying to change settings
           <p *ngFor="let message of formatHttpRequestError(errorMsg)">{{message}}</p>
         </div>
-        <button class="btn btn-primary btn-space">Save</button>
-        <button class="btn btn-primary btn-space" [routerLink]="['..']">Cancel</button>
+        <div class="spinner-border" role="status" *ngIf="loading">
+          <span class="sr-only">Loading...</span>
+        </div> 
+        <div *ngIf="!loading">
+          <button class="btn btn-primary btn-space">Save</button>
+          <button class="btn btn-primary btn-space" [routerLink]="['..']">Cancel</button>
+        </div>
       </div>
     </div>
   </form>
