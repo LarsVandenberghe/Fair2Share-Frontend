@@ -77,11 +77,6 @@ export class ProfileComponent implements OnInit {
   onDeleteActivity(activity : IActivity){
     this.activityService.deleteActivity$(activity.activityId).subscribe(
       () => {
-        // //reload profile
-        // this.dataService.getProfile$().subscribe(
-        //   profile => this._profile = profile,
-        //   err => this.errorMessage = err
-        // );
         this._profile.activities = this.profile.activities.filter(e => e.activityId !== activity.activityId);
       },
       (err: HttpErrorResponse) => {

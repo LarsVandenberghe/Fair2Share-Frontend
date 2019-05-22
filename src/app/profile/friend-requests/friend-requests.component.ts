@@ -4,7 +4,6 @@ import { IFriend } from 'src/app/data_types/IFriend';
 import { Router } from '@angular/router';
 
 @Component({
-  //selector: 'app-friend-requests',
   templateUrl: './friend-requests.component.html',
   styleUrls: ['./friend-requests.component.css']
 })

@@ -1,0 +1,13 @@
+.btn-space {
+    margin-right: 5px;
+}
+
+.nav-custom{
+    text-align: left;
+  }
+  
+  .nav-title-custom{
+    /* font-size: 1.4em;
+    padding: 10px; */
+    display: inline-block;
+  }

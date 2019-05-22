@@ -5,7 +5,6 @@ import { AuthenticationService } from '../authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ProfileDataService } from 'src/app/profile/profile-data.service';
 import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
 function comparePasswords(control: AbstractControl): { [key: string]: any } {

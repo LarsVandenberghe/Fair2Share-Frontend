@@ -15,18 +15,6 @@ export class UploadImageComponent implements OnInit {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild("fileInput") fileInput;
 
-  // addFile(fileInput: any): void {
-  //   let fi = fileInput.nativeElement;
-  //   if (fi.files && fi.files[0]) {
-  //     let fileToUpload = fi.files[0];
-  //     this.dataService
-  //       .uploadImage$(fileToUpload)
-  //       .subscribe(res => {
-  //         console.log(res);
-  //       });
-  //   }
-  // }
-
   onChanged() : void{
     let fi = this.fileInput.nativeElement;
     if (fi.files && fi.files[0]) {

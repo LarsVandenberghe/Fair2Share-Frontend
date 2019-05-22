@@ -33,7 +33,6 @@ export class EditProfileComponent implements OnInit {
         this.profile = this.fb.group({
           firstName: [this.simpleProfile.firstname],
           lastName: [this.simpleProfile.lastname],
-          //pathToImage: [this.simpleProfile.pathToImage]
         });
       }
     );

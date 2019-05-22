@@ -5,7 +5,6 @@ import { IActivity } from 'src/app/data_types/IActivity';
 import { ITransaction } from 'src/app/data_types/ITransaction';
 
 @Component({
-  //selector: 'app-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.css']
 })

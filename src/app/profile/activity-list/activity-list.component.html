@@ -1,5 +1,10 @@
-<div>
-  {{activity.name}}
-  <button class="float-right btn btn-primary" (click)="deleteActivity();$event.stopPropagation()">delete</button>
-  <!-- (click)="deleteActivity() -->
+<div class="nav-custom">
+  <h3 class="nav-title-custom">
+      {{activity.name}}
+  </h3>
+  
+  <div class="btn-group float-right">
+      <button class="btn btn-success" (click)="editActivity();$event.stopPropagation()">edit</button>
+    <button class="btn btn-danger" (click)="deleteActivity();$event.stopPropagation()">delete</button>
+  </div>
 </div>

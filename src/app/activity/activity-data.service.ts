@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -32,12 +32,16 @@ export class ActivityDataService {
   }
 
   getActivity$(id: number) : Observable<IActivity>{
-      return this.http.get<IActivity>(`${environment.apiUrl}/Activity/${id}`).pipe(
-        catchError(error => {
-          this.loadingError$.next(error.statusText);
-          return of(null);
-        })
-      );
+    return this.http.get<IActivity>(`${environment.apiUrl}/Activity/${id}`).pipe(
+      catchError(error => {
+        this.loadingError$.next(error.statusText);
+        return of(null);
+      })
+    );
+  }
+
+  updateActivity$(id :number, modal : IActivity){
+    return this.http.put(`${environment.apiUrl}/Activity/${id}`, modal);
   }
 
   deleteActivity$(id: number){
@@ -90,7 +94,6 @@ export class ActivityDataService {
   }
 
   updateTransaction$(id : number, transactionId: number, transaction : ITransaction){
-    ///api/Activity/{id}/transactions/{transaction_id}
     return this.http.put(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}`, transaction);
   }
 
@@ -117,6 +120,4 @@ export class ActivityDataService {
       return `£`;
     }
   }
-
-  // /api​/Activity​/{id}​/transactions​/{transaction_id}​/participants
 }

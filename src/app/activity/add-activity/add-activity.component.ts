@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityDataService } from '../activity-data.service';
-import { FormGroup, FormBuilder, FormControl, AbstractControl} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, AbstractControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfileDataService } from 'src/app/profile/profile-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
 @Component({
-  selector: 'app-add-activity',
   templateUrl: './add-activity.component.html',
   styleUrls: ['./add-activity.component.css']
 })
@@ -26,9 +24,9 @@ export class AddActivityComponent implements OnInit {
 
   ngOnInit() {
     this.activity = this.fb.group({
-      name: [''],
+      name: ['', Validators.required],
       description: [''],
-      valuta: ['']
+      valuta: ['', Validators.required]
     });
     //select first value in control
     this.activity.controls.valuta.setValue(this.valutas[0]);
@@ -38,7 +36,6 @@ export class AddActivityComponent implements OnInit {
     if (this.valutas.indexOf(this.activity.value.valuta) < 0){
       throw new Error(`invalid selection! ${this.activity.value.valuta}`);
     }
-    //let id : number;
     this.dataService.addActivity$(
       this.activity.value.name,
       this.activity.value.description,

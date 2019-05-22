@@ -3,15 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FriendListItemComponent } from './friend-list-item/friend-list-item.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { AddActivityComponent } from '../activity/add-activity/add-activity.component';
 import { FriendRequestsComponent } from './friend-requests/friend-requests.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
-import { ActivityModule } from '../activity/activity.module';
-import { AppModule } from '../app.module';
 import { SharedModule } from '../shared/shared.module';
 
 const routes = [
@@ -31,7 +28,6 @@ const routes = [
   declarations: [
     ActivityListComponent,
     ProfileComponent,
-    //FriendListItemComponent,
     AddActivityComponent,
     FriendRequestsComponent,
     AddFriendComponent,

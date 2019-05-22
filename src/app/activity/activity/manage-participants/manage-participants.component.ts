@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileDataService } from 'src/app/profile/profile-data.service';
-import { ActivityDataService } from '../activity-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFriend } from 'src/app/data_types/IFriend';
 import { IActivity } from 'src/app/data_types/IActivity';
+import { ActivityDataService } from '../../activity-data.service';
 
 @Component({
-  //selector: 'app-manage-participants',
   templateUrl: './manage-participants.component.html',
   styleUrls: ['./manage-participants.component.css']
 })

@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl,AbstractControl } from '@angular/forms';
 import { ITransaction } from 'src/app/data_types/ITransaction';
-import { ActivityDataService } from '../activity-data.service';
+import { ActivityDataService } from '../../activity-data.service';
 import { IActivity } from 'src/app/data_types/IActivity';
-import { ProfileDataService } from 'src/app/profile/profile-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
@@ -13,7 +12,6 @@ import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
   styleUrls: ['./add-transaction.component.css']
 })
 export class AddTransactionComponent implements OnInit {
-  //private activityId : number;
   public transaction : FormGroup;
   public activity : IActivity;
   public errorMsg: string;
@@ -74,5 +72,4 @@ export class AddTransactionComponent implements OnInit {
   formatHttpRequestError(json_str) : string[]{
     return this.sharedService.formatHttpRequestError(JSON.stringify(json_str));
   }
-
 }

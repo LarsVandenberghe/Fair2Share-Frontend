@@ -54,7 +54,6 @@ export class ProfileDataService {
     } else {
       return this.http.get(`${environment.apiUrl}/Profile/image/${id}`, { responseType: 'blob' });
     }
-    
   }
 
   deleteProfileImage$() {

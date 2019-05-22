@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ReactiveFormsModule } from '@angular/forms';
 
 function parseJwt(token) {
   if (!token) {
@@ -20,7 +19,6 @@ function parseJwt(token) {
 export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<string>;
-  //public localStorage: Storage = new Storage();
   public redirectUrl: string;
 
   constructor(private http: HttpClient) {

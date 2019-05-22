@@ -23,12 +23,10 @@ function serverSideValidateUsername(
 }
 
 @Component({
-  //selector: 'app-add-friend',
   templateUrl: './add-friend.component.html',
   styleUrls: ['./add-friend.component.css']
 })
 export class AddFriendComponent implements OnInit {
-  //public succes : boolean;
   public friend: FormGroup;
   public errorMsg: string;
   public succesMsg: string;

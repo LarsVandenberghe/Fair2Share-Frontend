@@ -19,8 +19,10 @@ export class ActivityListComponent implements OnInit {
   }
   
   deleteActivity(): void{
-    //console.log(this.activity);
     this.notify.emit(this.activity);
   }
 
+  editActivity(): void{
+    this.router.navigate(['profile', 'activity', this.activity.activityId, 'edit']);
+  }
 }

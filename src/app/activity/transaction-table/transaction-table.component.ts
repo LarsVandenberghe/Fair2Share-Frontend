@@ -21,7 +21,6 @@ export class TransactionTableComponent implements OnInit {
   ngOnInit() {
     this.dataService.getTransactions$(this.activity.activityId).subscribe(data => {
       this.transactions = data;
-      //console.log(data);
     });
   }
 
