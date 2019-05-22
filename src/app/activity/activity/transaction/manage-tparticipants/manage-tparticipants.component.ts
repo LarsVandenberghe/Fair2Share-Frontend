@@ -22,6 +22,8 @@ export class ManageTParticipantsComponent implements OnInit {
   public toBeAdded: IFriend[] = [];
   public toBeRemoved: IFriend[] = [];
   public errorMesage: string;
+  public saved : boolean = false;
+  public undone : boolean = false;
   
   constructor(
     private profileDataService: ProfileDataService,
@@ -39,6 +41,8 @@ export class ManageTParticipantsComponent implements OnInit {
     this.allFriends = this.activity.participants;
     this.toBeAdded = [];
     this.toBeRemoved = [];
+    this.saved = false;
+    this.undone = true;
   }
 
   getInTransaction(): IFriend[] {
@@ -75,6 +79,8 @@ export class ManageTParticipantsComponent implements OnInit {
           this.dataService.addParticipantsToTransaction$(this.activity.activityId, this.transaction.transactionId, this.toBeAdded)
             .subscribe(() => {
               this.notify.emit();
+              this.saved = true;
+              this.undone = false;
             });
         }, err => {
           this.errorMesage = err.error;
@@ -83,6 +89,8 @@ export class ManageTParticipantsComponent implements OnInit {
       this.dataService.removeParticipantsFromTransaction$(this.activity.activityId, this.transaction.transactionId, this.toBeRemoved)
         .subscribe(() => {
           this.notify.emit();
+          this.saved = true;
+          this.undone = false;
         }, err => {
           this.errorMesage = err.error;
         });
@@ -90,9 +98,19 @@ export class ManageTParticipantsComponent implements OnInit {
       this.dataService.addParticipantsToTransaction$(this.activity.activityId, this.transaction.transactionId, this.toBeAdded)
         .subscribe(() => {
           this.notify.emit();
+          this.saved = true;
+          this.undone = false;
         });
     } else {
       this.notify.emit();
+      this.saved = true;
+      this.undone = false;
     }
+
+  }
+
+  resetMessages(){
+    this.saved = false;
+    this.undone = false;
   }
 }

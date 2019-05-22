@@ -1,19 +1,22 @@
 <div class="container">
-  <h2>Manage Participants</h2>
+
   <div class="card">
+    <div class="card-header">
+        <h2>Manage Participants</h2>
+    </div>
     <div class="card-body">
-      <div class="row">
+      <div class="row" (click)="resetMessages()">
         <div class="col-md-6">
           <ul class="list-group">
             <li class="list-group-item active">
-              <h4 class="float-left">Friends not in Activity</h4>
+              <h4 class="float-left">Not in Transaction</h4>
             </li>
             <li class="list-group-item activity" *ngFor="let friend of getNotInTransaction()">
               <app-friend-list-item [friend]="friend"></app-friend-list-item>
               <span class="float-right btn btn-success" style="margin-top: 5px;" (click)="addToToBeAdded(friend)">Add</span>
             </li>
             <li class="list-group-item" *ngIf="getNotInTransaction().length == 0">
-                All your friends are in this activity.
+                All people are in this transaction.
             </li>
           </ul>
         </div>
@@ -27,6 +30,9 @@
               <app-friend-list-item [friend]="part"></app-friend-list-item>
               <span class="float-right btn btn-danger" style="margin-top: 5px;"(click)="addToToBeRemoved(part)">Delete</span>
             </li>
+            <li class="list-group-item" *ngIf="getInTransaction().length == 0">
+                There are no people int this transaction yet.
+            </li>
           </ul>
         </div>
 
@@ -38,7 +44,12 @@
         <button class="btn btn-primary btn-space" (click)="save()">Save</button>
         <button class="btn btn-primary btn-space" (click)="reload()">Cancel</button>
       </div>
-
+      <div class="alert alert-success" *ngIf="saved" style="margin-top: 10px;">
+        Changes have been saved.
+      </div>
+      <div class="alert alert-warning" *ngIf="undone" style="margin-top: 10px;">
+        Changes have been undone.
+      </div>
     </div>
   </div>
 </div>

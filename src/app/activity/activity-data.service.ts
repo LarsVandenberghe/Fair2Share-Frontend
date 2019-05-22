@@ -77,6 +77,10 @@ export class ActivityDataService {
     return this.http.get<ITransaction[]>(`${environment.apiUrl}/Activity/${id}/transactions`);
   }
 
+  getTransaction$(id : number, transactionId: number) : Observable<ITransaction>{
+    return this.http.get<ITransaction>(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}`);
+  }
+
   addTransaction$(id: number, transaction : ITransaction){
     return this.http.post(`${environment.apiUrl}/Activity/${id}/transactions`, transaction);
   }

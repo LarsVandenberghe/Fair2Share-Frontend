@@ -3,10 +3,26 @@
   <h3 *ngIf="transaction.description">{{transaction.description}}</h3>
   <hr>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <b>Paid by:</b>
+          <p>{{transaction.paidBy.firstname}} {{transaction.paidBy.lastname}}</p>
+          <b>Amount:</b>
+          <p>{{formattedMoney()}}</p>
+          <b>Paid on:</b>
+          <p>{{transaction.timeStamp}}</p>
+        </div>
+      </div>
+      <div class="btn-group" style="padding-top: 10px;">
+          <button class="btn btn-success" (click)="edit()">Edit</button>
+          <button class="btn btn-danger" (click)="delete()">Delete</button>
+          <button class="btn btn-primary" (click)="back()">Back</button>
+        </div>
+    </div>
+    <div class="col-md-9">
       <app-manage-tparticipants [transaction]="transaction" [activity]="activity"></app-manage-tparticipants>  
     </div>
   </div>
-  
 </div>
 
