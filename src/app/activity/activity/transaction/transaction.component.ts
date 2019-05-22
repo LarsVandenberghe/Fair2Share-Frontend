@@ -12,6 +12,7 @@ import { ITransaction } from 'src/app/data_types/ITransaction';
 export class TransactionComponent implements OnInit {
   public activity : IActivity;
   public transaction : ITransaction;
+  public errorMessage : string;
 
   constructor(
     private dataService: ActivityDataService,
@@ -44,11 +45,12 @@ export class TransactionComponent implements OnInit {
   }
 
   edit(){
-
+    this.router.navigate(['profile', 'activity', this.activity.activityId, 'transaction', this.transaction.transactionId, 'edit']);
   }
 
   delete(){
-
+    this.dataService.removeTransaction$(this.activity.activityId, this.transaction.transactionId)
+    .subscribe(() => {this.router.navigate(['profile', 'activity', this.activity.activityId]);}, err => this.errorMessage = err.error);
   }
 
   formattedMoney() : string{

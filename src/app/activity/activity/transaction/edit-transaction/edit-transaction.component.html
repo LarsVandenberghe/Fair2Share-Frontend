@@ -1,7 +1,7 @@
 <div class="container">
-  <h1 style="margin-top: 1em;">Add transaction</h1>
+  <h1 style="margin-top: 1em;">Edit transaction</h1>
   <hr>
-  <form [formGroup]="transaction" (ngSubmit)="onSubmit()" *ngIf="activity">
+  <form [formGroup]="transactionEditted" (ngSubmit)="onSubmit()" *ngIf="transaction">
     <div class="row">
         <div class="form-group col-md-5">
             <label>Name*</label>
@@ -24,12 +24,12 @@
           </div>
     </div>
     <div class="alert alert-danger" *ngIf="errorMsg != null && errorMsg != ''">
-      Error while trying make transaction:
+      Error while trying to edit transaction:
       <p *ngFor="let message of formatHttpRequestError(errorMsg)">{{message}}</p>
     </div>
 
     <button type="submit" class="btn btn-primary btn-space">
-      Make Transaction
+      Edit Transaction
     </button>
     <button (click)="handleCancle()" class="btn btn-primary btn-space">
       Cancel

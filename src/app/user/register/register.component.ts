@@ -5,6 +5,8 @@ import { AuthenticationService } from '../authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ProfileDataService } from 'src/app/profile/profile-data.service';
+import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
 function comparePasswords(control: AbstractControl): { [key: string]: any } {
   const password = control.get('password');
@@ -36,10 +38,12 @@ export class RegisterComponent implements OnInit {
   public user: FormGroup;
   public errorMsg: string;
 
-  constructor(private authService: AuthenticationService,
+  constructor(
+    private authService: AuthenticationService,
     private router: Router,
-    private fb: FormBuilder) {
-  }
+    private fb: FormBuilder,
+    private sharedService: SharedMethodsService
+    ) {}
 
   ngOnInit(): void {
     this.user = this.fb.group({
@@ -100,7 +104,6 @@ export class RegisterComponent implements OnInit {
           }
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
           if (err.error instanceof Error) {
             this.errorMsg = err.error.message;
           } else {
@@ -111,14 +114,6 @@ export class RegisterComponent implements OnInit {
   }
 
   formatHttpRequestError(json_str) : string[]{
-    var json = JSON.parse(json_str);
-    var out : string[]= new Array(Object.keys(json).length);
-  
-    for (var key in json) {
-      out.push(`${key}: ${json[key]}`);
-   }
-
-    console.log(out)
-    return out;
+    return this.sharedService.formatHttpRequestError(json_str);
   }
 }

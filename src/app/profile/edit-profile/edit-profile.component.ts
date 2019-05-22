@@ -3,6 +3,8 @@ import { ProfileDataService } from '../profile-data.service';
 import { ISimpleProfile } from 'src/app/data_types/ISimpleProfile';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,11 +17,14 @@ export class EditProfileComponent implements OnInit {
   public image: any;
   public changeImage: boolean = false;
   public loading : boolean = false;
+  public errorMsg : string;
 
   constructor(
     private dataService: ProfileDataService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private sharedService : SharedMethodsService
+    ) { }
 
   ngOnInit() {
     this.dataService.getSimpleProfile$().subscribe(
@@ -53,7 +58,14 @@ export class EditProfileComponent implements OnInit {
       }
     } else {
       this.dataService.setSimpleprofile$(this.simpleProfile).subscribe(
-        () => this.router.navigate(['profile'])
+        () => this.router.navigate(['profile']),   
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            this.errorMsg = err.error.message;
+          } else {
+            this.errorMsg = err.error;
+          }
+        }
       );
     }
   }
@@ -85,4 +97,7 @@ export class EditProfileComponent implements OnInit {
     this.dataService.deleteProfileImage$().subscribe();
   }
 
+  formatHttpRequestError(json_str) : string[]{
+    return this.sharedService.formatHttpRequestError(JSON.stringify(json_str));
+  }
 }

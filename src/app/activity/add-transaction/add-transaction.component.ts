@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators, FormControl,AbstractControl } from 
 import { ITransaction } from 'src/app/data_types/ITransaction';
 import { ActivityDataService } from '../activity-data.service';
 import { IActivity } from 'src/app/data_types/IActivity';
+import { ProfileDataService } from 'src/app/profile/profile-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
 @Component({
   templateUrl: './add-transaction.component.html',
@@ -13,12 +16,14 @@ export class AddTransactionComponent implements OnInit {
   //private activityId : number;
   public transaction : FormGroup;
   public activity : IActivity;
+  public errorMsg: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private activityDataService : ActivityDataService
+    private activityDataService : ActivityDataService,
+    private sharedService : SharedMethodsService
   ) { }
 
   ngOnInit() {
@@ -47,7 +52,14 @@ export class AddTransactionComponent implements OnInit {
       paidBy: this.transaction.value.paidBy
   };
     this.activityDataService.addTransaction$(this.activity.activityId, modal).subscribe(
-      ( id : number ) => this.router.navigate(['profile', 'activity', this.activity.activityId, 'transaction', id])
+      ( id : number ) => this.router.navigate(['profile', 'activity', this.activity.activityId, 'transaction', id]),
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          this.errorMsg = err.error.message;
+        } else {
+          this.errorMsg = err.error;
+        }
+      }
     );
   }
 
@@ -57,6 +69,10 @@ export class AddTransactionComponent implements OnInit {
 
   getValutaSymbol() : string{
     return this.activityDataService.currencyTypeSymbol(this.activity.currencyType);
+  }
+
+  formatHttpRequestError(json_str) : string[]{
+    return this.sharedService.formatHttpRequestError(JSON.stringify(json_str));
   }
 
 }

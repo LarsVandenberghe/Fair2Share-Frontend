@@ -81,10 +81,18 @@ export class ActivityDataService {
     return this.http.get<ITransaction>(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}`);
   }
 
+  removeTransaction$(id : number, transactionId: number){
+    return this.http.delete(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}`);
+  }
+
   addTransaction$(id: number, transaction : ITransaction){
     return this.http.post(`${environment.apiUrl}/Activity/${id}/transactions`, transaction);
   }
 
+  updateTransaction$(id : number, transactionId: number, transaction : ITransaction){
+    ///api/Activity/{id}/transactions/{transaction_id}
+    return this.http.put(`${environment.apiUrl}/Activity/${id}/transactions/${transactionId}`, transaction);
+  }
 
   removeParticipantsFromTransaction$(id : number, transactionId: number, parts : IFriend[]) : Observable<any>{
     var params : string = "?";

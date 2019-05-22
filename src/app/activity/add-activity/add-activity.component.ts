@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityDataService } from '../activity-data.service';
 import { FormGroup, FormBuilder, FormControl, AbstractControl} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileDataService } from 'src/app/profile/profile-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
 
 @Component({
   selector: 'app-add-activity',
@@ -12,11 +15,13 @@ export class AddActivityComponent implements OnInit {
   public activity: FormGroup;
   public valutas: string[] = ["EURO", "DOLLAR", "POUND"];
   public selectedValuta: string = "EURO"; 
+  public errorMsg: string;
 
   constructor(
     private fb: FormBuilder,
     private dataService: ActivityDataService,
-    private router: Router
+    private router: Router,
+    private sharedService : SharedMethodsService
     ) {}
 
   ngOnInit() {
@@ -40,13 +45,22 @@ export class AddActivityComponent implements OnInit {
       this.valutas.indexOf(this.activity.value.valuta)
     ).subscribe(
       val => {
-        //this.dataService.localActivityId = val;
         this.router.navigate(['profile', 'activity', val]);
+      }, (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          this.errorMsg = err.error.message;
+        } else {
+          this.errorMsg = err.error;
+        }
       }
     )
   }
 
   handleCancle(){
     this.router.navigateByUrl("/profile");
+  }
+
+  formatHttpRequestError(json_str) : string[]{
+    return this.sharedService.formatHttpRequestError(JSON.stringify(json_str));
   }
 }

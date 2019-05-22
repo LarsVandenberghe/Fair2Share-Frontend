@@ -11,12 +11,14 @@ import { AddTransactionComponent } from './add-transaction/add-transaction.compo
 import { TransactionComponent } from './activity/transaction/transaction.component';
 import { ManageParticipantsComponent } from './manage-participants/manage-participants.component';
 import { ManageTParticipantsComponent } from './activity/transaction/manage-tparticipants/manage-tparticipants.component';
+import { EditTransactionComponent } from './activity/transaction/edit-transaction/edit-transaction.component';
 
 const routes = [
   { path: ':id', component: ActivityComponent },
   { path: ':id/participants', component: ManageParticipantsComponent },
   { path: ':id/add-transaction', component: AddTransactionComponent },
-  { path: ':id/transaction/:transaction-id', component: TransactionComponent }
+  { path: ':id/transaction/:transaction-id', component: TransactionComponent },
+  { path: ':id/transaction/:transaction-id/edit', component: EditTransactionComponent }
 ];
 
 @NgModule({
@@ -27,7 +29,8 @@ const routes = [
     AddTransactionComponent,
     TransactionComponent,
     ManageParticipantsComponent,
-    ManageTParticipantsComponent
+    ManageTParticipantsComponent,
+    EditTransactionComponent
   ],
   imports: [
     CommonModule,

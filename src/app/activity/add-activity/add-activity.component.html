@@ -1,5 +1,6 @@
 <div class="container">
   <h2 style="margin-top: 1em;">Add activity</h2>
+  <hr>
   <div class="card container">
     <div class="card-body">
       <form [formGroup]="activity" (ngSubmit)="onSubmit()">
@@ -17,6 +18,10 @@
           <select formControlName="valuta" aria-label="valuta" class="form-control select">
             <option [ngValue]="valu" *ngFor="let valu of valutas">{{valu}}</option>
           </select>
+        </div>
+        <div class="alert alert-danger" *ngIf="errorMsg != null && errorMsg != ''">
+          Error while trying to add activity:
+          <p *ngFor="let message of formatHttpRequestError(errorMsg)">{{message}}</p>
         </div>
         <button type="submit" class="btn btn-primary btn-space">
           Make Activity

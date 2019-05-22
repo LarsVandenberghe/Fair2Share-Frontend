@@ -24,5 +24,8 @@
       <app-manage-tparticipants [transaction]="transaction" [activity]="activity"></app-manage-tparticipants>  
     </div>
   </div>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
 </div>
 
