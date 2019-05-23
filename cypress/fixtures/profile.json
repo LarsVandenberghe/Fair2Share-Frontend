@@ -1,0 +1,31 @@
+{
+  "profileId": 4,
+  "firstname": "Lars",
+  "lastname": "Vandenberghe",
+  "email": "lars@hogent.be",
+  "friends": [{
+    "profileId": 3,
+    "firstname": "Angular",
+    "lastname": "ASP.NET",
+    "friendRequestState": null
+  }, {
+    "profileId": 5,
+    "firstname": "Jef",
+    "lastname": "Jefferson",
+    "friendRequestState": null
+  }, {
+    "profileId": 6,
+    "firstname": "Mei",
+    "lastname": "Akasuki",
+    "friendRequestState": null
+  }],
+  "activities": [{
+    "activityId": 3,
+    "name": "School trip Canada",
+    "description": "Setting up servers in canada.",
+    "currencyType": 0,
+    "participants": null,
+    "transactions": null
+  }],
+  "amountOfFriendRequests": 80
+}

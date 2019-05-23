@@ -21,7 +21,7 @@
       <input placeholder="email" aria-label="email" formControlName="email" class="form-control" />
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
       </small>
-      <div class="alert alert-danger" *ngIf="user.get('email').errors && user.get('email').touched">
+      <div class="alert alert-danger" *ngIf="user.get('email').errors && user.get('email').touched" cy-data="email">
         {{ getErrorMessage(user.get('email').errors) }}
       </div>
     </div>
@@ -42,7 +42,7 @@
         <input type="password" placeholder="confirm password" aria-label="confirm password"
           formControlName="confirmPassword" class="form-control" />
         <div class="alert alert-danger"
-          *ngIf="user.get('passwordGroup').errors && user.get('passwordGroup').get('confirmPassword').touched && user.get('passwordGroup').get('password').touched">
+          *ngIf="user.get('passwordGroup').errors && user.get('passwordGroup').get('confirmPassword').touched && user.get('passwordGroup').get('password').touched" cy-data="matchPasswords">
           {{ getErrorMessage(user.get('passwordGroup').errors) }}
         </div>
       </div>

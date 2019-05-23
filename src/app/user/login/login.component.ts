@@ -51,9 +51,9 @@ export class LoginComponent implements OnInit {
               }: ${err.error.message}`;
           } else {
             if (err.status === 404) {
-              this.errorMsg = 'Webserver lijkt offline, neem contact op met de website eigenaar.';
+              this.errorMsg = 'Webserver seems offline, please contact the site owner.';
             } else if (err.status === 400) {
-              this.errorMsg = 'Email adress en of passwoord is niet juist';
+              this.errorMsg = 'Email address and or password is wrong';
             }
           }
         }

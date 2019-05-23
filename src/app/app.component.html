@@ -3,14 +3,11 @@
     <div class="header-nav" [routerLink]="['/home']">Fair2Share</div>
   </span>
   <ul *ngIf="getLoggedIn()" class="nav nav-bar">
-    <!-- <li class="nav-item">
-      <div class="nav-link" [routerLink]="['/']">Activities</div>
-    </li> -->
     <li class="nav-item">
       <div class="nav-link" [routerLink]="['/profile']">Profile</div>
     </li>
     <li class="nav-item">
-      <div class="nav-link" (click)="logOut()">Log out</div>
+      <div class="nav-link" (click)="logOut()" cy-data="logout">Log out</div>
     </li>
   </ul>
   <ul *ngIf="!getLoggedIn()" class="nav nav-bar">

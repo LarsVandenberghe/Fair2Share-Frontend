@@ -8,7 +8,7 @@
           <input type="password" placeholder="password" aria-label="password" formControlName="password"
             class="form-control">
           <button type="submit" class="btn btn-primary btn-block">Login</button>
-          <div *ngIf="errorMsg != null && errorMsg != ''" class="alert-danger" style="margin: 10px 0px; padding: 7px">{{errorMsg}}</div>
+          <div *ngIf="errorMsg != null && errorMsg != ''" class="alert-danger" style="margin: 10px 0px; padding: 7px" data-cy="loginErrorMsg">{{errorMsg}}</div>
         </div>
       </form>
     </div>
