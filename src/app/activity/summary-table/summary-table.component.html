@@ -13,7 +13,7 @@
           </td>
           <td style="vertical-align: middle;">
               <span [style.color]="participant.value >= 0? '#28a745' : '#bd2130'">
-                  {{formatMoney(participant.value)}}
+                  {{participant.value|moneyFormat:activity.currencyType}}
               </span>
           </td>
       </tr>

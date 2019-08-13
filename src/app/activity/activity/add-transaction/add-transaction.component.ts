@@ -6,6 +6,8 @@ import { ActivityDataService } from '../../activity-data.service';
 import { IActivity } from 'src/app/data_types/IActivity';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SharedMethodsService } from 'src/app/shared/shared-methods.service';
+import { map, switchAll } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   templateUrl: './add-transaction.component.html',
@@ -31,14 +33,23 @@ export class AddTransactionComponent implements OnInit {
       payment: [3.50, Validators.required],
       paidBy: ['', Validators.required]
     });
-    this.route.params.subscribe(p => {
-      if (this.activityDataService.localActivity && this.activityDataService.localActivity.activityId === +p['id']){
-        this.activity = this.activityDataService.localActivity
+    // this.route.params.subscribe(p => {
+    //   if (this.activityDataService.localActivity && this.activityDataService.localActivity.activityId === +p['id']){
+    //     this.activity = this.activityDataService.localActivity
+    //   } else {
+    //     this.activityDataService.getActivity$(+p['id']).subscribe(data => {
+    //       this.activity = data;
+    //     });
+    //   }
+    // });
+    this.route.params.pipe(map(data => {
+      if (this.activityDataService.localActivity && this.activityDataService.localActivity.activityId === +data['id']){
+        return new BehaviorSubject(this.activityDataService.localActivity);
       } else {
-        this.activityDataService.getActivity$(+p['id']).subscribe(data => {
-          this.activity = data;
-        });
+        return this.activityDataService.getActivity$(+data['id']);
       }
+    }), switchAll()).subscribe((data2: IActivity) => {
+        this.activity = data2;
     });
   }
 
